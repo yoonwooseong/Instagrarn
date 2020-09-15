@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Instagrarn</title>
-
+	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/main.css">
 	
 	<script type="text/javascript">
@@ -32,34 +32,8 @@
 
 </head>
 <body>
-	<nav class="nav">
-			<div class="nav_title">
-				<a href="home.jsp">
-					<img src="${ pageContext.request.contextPath }/resources/images/title.png" alt="Home">
-				</a>
-			</div>
-			
-			<input class="nav_search" type="search" value="검색">
-			
-			<div class="nav_menu">
-				<a href="home.jsp">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconHome.png" alt="Home">
-				</a>
-				<a href="#">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconDM.png" alt="Message">
-				</a>
-				<a href="#">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconNa.png" alt="na">
-				</a>
-				<a href="#">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconHeart.png" alt="heart">
-				</a>
-				<a href="#">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="myInfo">
-				</a>
-			</div>
-	</nav>
-	
+
+<jsp:include page="../header.jsp"/>
 	
 	<main class="main">
 		<div class="contain">

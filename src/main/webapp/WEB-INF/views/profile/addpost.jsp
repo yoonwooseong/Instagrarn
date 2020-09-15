@@ -7,22 +7,26 @@
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/profile.css">
 	
 	<script type="text/javascript">
-	function post(){
-		alert("ㅋㅋ");
-		e.preventDefault();
-
-		$('#file').click();
-
-		return;
-	}
-	
+		function post(){
+			var f = document.f;
+			
+			var file = f.file.value;
+			var content = f.content.value.trim();
+			var area = f.content.value.trim();
+			if(file == ''){
+				alert("사진을 업로드 해주세요");
+				return;
+			}
+			
+			f.submit();
+		}
 	</script>
 </head>
 <body>
 
 <jsp:include page="../header.jsp"/>
-
-<main class="page">
+<form action="upload" name="f" method="post" enctype="multipart/form-data">
+<main class="page" name="page">
 	<div class="main">
 		<div class="post_img">
 			<div class="post_img_text">
@@ -36,17 +40,15 @@
 		
 		<div class="post_text">
 		신규 사진 추가<br>
-		
-		
 		상세정보<br>
-		
-		<textarea placeholder="문구입력.." rows="5" cols="40"></textarea><br>
+		<textarea placeholder="문구입력.." name="content" rows="5" cols="40"></textarea><br>
 		위치추가<br>
-		<input placeholder="위치" style="width:300px;height:40px;"><br>
-		<input type="button" value="게시">
+		<input placeholder="위치" name="area" style="width:300px;height:40px;"><br>
+		<input type="button" value="게시" onclick="post();">
 		<input type="button" value="임시저장">
 		</div>
 	</div>
 </main>
+</form>
 </body>
 </html>

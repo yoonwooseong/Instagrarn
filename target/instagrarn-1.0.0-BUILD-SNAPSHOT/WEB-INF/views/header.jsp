@@ -8,12 +8,13 @@
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/header.css">
 </head>
 <body>
+<div class="all" style="top:0; right:0; left:0;">
 	<nav class="nav">
 		<div class="nav_div">
 		<div class="nav_title_div">
 			<div class="nav_title">
 				<a href="home.jsp">
-					<img src="${ pageContext.request.contextPath }/resources/images/title.png" alt="Home">
+					<img src="${ pageContext.request.contextPath }/resources/images/logo2.png" alt="Home">
 				</a>
 			</div>
 		</div>
@@ -41,6 +42,6 @@
 		</div>
 		</div>
 	</nav>
-	
+</div>
 </body>
 </html>

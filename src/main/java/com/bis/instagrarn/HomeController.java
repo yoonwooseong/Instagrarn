@@ -24,12 +24,6 @@ public class HomeController {
 	
 	@Autowired
 	UserService userService;
-
-	@RequestMapping(value = "/addpost", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
-		return Common.Profile.VIEW_PATH + "addpost.jsp";
-	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {

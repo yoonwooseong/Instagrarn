@@ -14,7 +14,7 @@
 		<div class="nav_title_div">
 			<div class="nav_title">
 				<a href="main">
-					<img src="${ pageContext.request.contextPath }/resources/images/logo2.png" alt="Home">
+					<img src="${ pageContext.request.contextPath }/resources/images/logo3.png" alt="Home">
 				</a>
 			</div>
 		</div>

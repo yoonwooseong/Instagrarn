@@ -14,16 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import common.Common;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class ProfileController {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/addpost", method = RequestMethod.GET)
 	public String home() {
 
-		return "profile/addpost";
+		return Common.Profile.VIEW_PATH + "addpost.jsp";
 	}
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -60,6 +62,6 @@ public class ProfileController {
 			}
 			
 		}
-		return "profile/profile";
+		return Common.Profile.VIEW_PATH + "profile.jsp";
 	}
 }

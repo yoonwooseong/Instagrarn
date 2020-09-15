@@ -35,7 +35,7 @@
 		<beans:property name="password" value="1111" />
 	</beans:bean>
 	
-	<beans:bean class="com.bis.instagrarn.HomeController"/>
+	<beans:bean class="com.bis.instagrarn.HomeController"/>  
 	<beans:bean id="userService" class="service.UserService"/>
 	<beans:bean id="userDAO" class="dao.UserDAO"/>
 	

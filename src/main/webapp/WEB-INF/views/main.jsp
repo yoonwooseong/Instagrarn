@@ -39,7 +39,7 @@
 				</a>
 			</div>
 			
-			<input class="nav_search"type="search" value="검색">
+			<input class="nav_search" type="search" value="검색">
 			
 			<div class="nav_menu">
 				<a href="home.jsp">

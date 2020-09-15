@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>Instagrarn</title>
-	
+	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/header.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
 		<div class="nav_div">
 		<div class="nav_title_div">
 			<div class="nav_title">
-				<a href="home.jsp">
+				<a href="main">
 					<img src="${ pageContext.request.contextPath }/resources/images/logo2.png" alt="Home">
 				</a>
 			</div>

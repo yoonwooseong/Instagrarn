@@ -53,4 +53,26 @@ public class ProfileDAO {
 		return list;
 	}
 
+	public List<ProfileVO> select_post(int user_idx, int page) {
+		int set_page = page * 5;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + page + ", 5";
+		
+		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
+
+			@Override
+			public ProfileVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ProfileVO list = new ProfileVO(
+						rs.getInt("board_idx"),
+						rs.getInt("user_idx"),
+						rs.getString("img"),
+						rs.getString("content"),
+						rs.getString("area"));
+				return list;
+			}
+			
+		});
+		return list;
+	}
+	
 }

@@ -64,3 +64,17 @@ nav .nav_menu{
 	right:4%;
 	letter-spacing: 8px;
 }
+
+.profile{
+	width:230px;
+	height:166px;
+	float:right;
+	background: rgba(var(--d87,255,255,255),1);
+    border-radius: 6px;
+	position:absolute;
+	top:43px;
+	right:18%;
+	display:flex;
+	border: 0 solid #000;
+	box-shadow:0px 0px 5px 3px #dbdbdb;
+}

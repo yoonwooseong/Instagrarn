@@ -10,7 +10,7 @@
 	
 	<script type="text/javascript">
 		function post(){
-			var f = document.form;
+			var f = document.f;
 			
 			var file = f.file.value;
 			var content = f.content.value.trim();
@@ -27,7 +27,7 @@
 <body>
 
 <jsp:include page="../header.jsp"/>
-<form action="upload" name="form" method="post" enctype="multipart/form-data">
+<form action="upload" name="f" method="post" enctype="multipart/form-data">
 <main class="page" name="page">
 	<div class="main">
 		<div class="post_img">

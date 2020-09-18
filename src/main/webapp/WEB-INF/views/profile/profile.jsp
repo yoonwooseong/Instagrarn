@@ -9,12 +9,25 @@
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/profile.css">
 	
 	<script type="text/javascript">
-
+		function btn_post(){
+			document.getElementById("group1").style="border-top: 1px solid rgba(var(--i1d,38,38,38),1)";
+			document.getElementById("group2").style="border-top:";
+			document.getElementById("user_post").style="display:block";
+			document.getElementById("user_tag").style="display:none";
+		}
+		
+		function btn_tag(){
+			document.getElementById("group1").style="border-top:";
+			document.getElementById("group2").style="border-top: 1px solid rgba(var(--i1d,38,38,38),1)";
+			document.getElementById("user_post").style="display:none";
+			document.getElementById("user_tag").style="display:block";
+		}
 	</script>
 </head>
 <body>
 
 <jsp:include page="../header.jsp"/>
+
 <main class="page">
 	<div class="main">
 		<div class="base">
@@ -55,11 +68,39 @@
 				</div>
 			</div>
 		</div>
-	
-		<c:forEach var="list" items="${list}">
-			<img src="resources/post/${list.img}" width="200"/>
-		</c:forEach>
+		
+		<div class="menu_bar">
+			<div class="menu_bar_size">
+				<div class="group1" id="group1" style="border-top:1px solid rgba(var(--i1d,38,38,38),1);" onclick="btn_post();">
+					<div class="btn_post">
+					<img src="${ pageContext.request.contextPath }/resources/images/post.png" alt="myInfo" width="12" class="btn_img">
+					<div class="btn_text">게시물</div>
+					</div>
+				</div>
+				<div class="margin"></div>
+				<div class="group2" id="group2" onclick="btn_tag();">
+					<div class="btn_post">
+					<img src="${ pageContext.request.contextPath }/resources/images/post_button4.png" alt="myInfo" width="12" class="btn_img">
+					<div class="btn_text">태그됨</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		
+      
+		<div class="user_post" id="user_post" style="width:972px;">
+			<c:forEach var="list" items="${list}">
+			<img src="resources/post/${list.img}" width="293" height="293" style="margin-right:27px;"/>
+			</c:forEach>
+		</div>
+		
+		<div class="user_tag" id="user_tag">
+			아직 태그된게 없음
+		</div>
 	</div>
 </main>
+
 </body>
 </html>

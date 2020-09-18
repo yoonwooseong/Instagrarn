@@ -20,7 +20,7 @@ page{
     padding-left:20px;
 }
 
-.base{width: 100%;}
+.base{width: 100%; overflow:auto;}
 
 .profile_img_box{
 	width:290px;
@@ -137,4 +137,65 @@ page{
 	font-size:15px;
     font-weight: 600;
 }
+    
+.menu_bar{
+	border-top:1px solid rgba(var(--b38,219,219,219),1);
+    color:#8e8e8e;
+    height:53px;
+    width:935px;
+    text-align:center;
+    
+}
+.menu_bar_size{
+	width:164px;
+	height:53px;
+	display:table;
+	margin:0 auto;
+}
+.group1{
+	width:57px;
+	overflow:auto;
+	text-align:center;
+	vertical-align:middle;
+	display:table-cell;
+	
+}
+.group2{
+	width:57px;
+	overflow:auto;
+	text-align:center;
+	vertical-align:middle;
+	display:table-cell;
+}
+.margin{width:50px;}
+.btn_post{
+	text-align:center;
+	width:57px;
+	height:17px;
+	float:left;
+}
 
+
+.btn_tag{
+	width:57px;
+	height:17px;
+	margin-right:60px;
+	float:left;
+}
+
+.btn_img{float:left;}
+	
+.btn_text{
+	margin-left:6px;
+	font-size:12px;
+	font-weight:600;
+	float:left;
+}
+
+.user_post{
+   margin-bottom:28px;
+}
+
+.user_tag{
+	text-align:center;
+}

@@ -11,12 +11,12 @@
 	function alert_new(){
 		switch (document.getElementById("nav_alert_news").style.display) {
 		case "block":
-			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/IconHome2.png"
+			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/Home2.png"
 			document.getElementById("heart_icon").src="${ pageContext.request.contextPath }/resources/images/IconHeart.png"
 			document.getElementById("nav_alert_news").style.display="none";
 			break;
 		case "none": 
-			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/IconHome.png"
+			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/Home.png"
 			document.getElementById("heart_icon").src="${ pageContext.request.contextPath }/resources/images/IconHeart2.png"
 			document.getElementById("nav_alert_news").style.display="block";
 			break;
@@ -27,11 +27,11 @@
 		var profile = document.getElementById("profile");
 		switch(profile.style.display){
 		case "none" : 
-			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/IconHome2.png";
+			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/Home.png";
 			profile.style.display = "block";
 			break;
 		case "block" :
-			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/IconHome.png";
+			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/Home2.png";
 			profile.style.display = "none";
 			break;
 		}
@@ -55,7 +55,7 @@
 		<div class="nav_menu_div">
 			<div class="nav_menu">
 				<a href="home.jsp">
-					<img src="${ pageContext.request.contextPath }/resources/images/IconHome.png" alt="Home"  id="home_icon">
+					<img src="${ pageContext.request.contextPath }/resources/images/Home2.png" alt="Home"  id="home_icon">
 				</a>
 				<a href="#">
 					<img src="${ pageContext.request.contextPath }/resources/images/IconDM.png" alt="Message">

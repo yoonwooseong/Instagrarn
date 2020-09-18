@@ -47,3 +47,4 @@
 	<beans:bean id="profileService" class="service.ProfileService"/>
 	<beans:bean id="profileDAO" class="dao.ProfileDAO"/>
 </beans:beans>
+  

@@ -57,7 +57,7 @@
 		</div>
 	
 		<c:forEach var="list" items="${list}">
-		<img src="resources/post/${list.img}" width="200"/>
+			<img src="resources/post/${list.img}" width="200"/>
 		</c:forEach>
 	</div>
 </main>

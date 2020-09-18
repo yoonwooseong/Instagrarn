@@ -11,15 +11,16 @@
 <script type="text/javascript">
 		var num = 1;
 		var path = "${ pageContext.request.contextPath }/resources/images/ex_post_img";
-		
+		var page_count = 0;
 		window.onscroll = function(ev) {
 		    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 		    	//여기서 Ajax로 컨트롤러로 들어가 데이터를 가져와 정보 넣어주기
-		    	//function load_post_info(){
-		        //    var url ="loadpost";
-		        //    var param = "";
-		        //    sendRequest( url, param , resultFn, "GET");
-		        // }
+		    	function load_post_info(){
+		    		page_count++;
+		            var url ="loadpost";
+		            var param = "page="+page;
+		            sendRequest( url, param , resultFn, "GET");
+		         }
 		    	//function resultFn(){            
 		        //    if( xhr.readyState == 4 && xhr.status == 200 ){
 		        //      var data = xhr.responseText;
@@ -203,10 +204,11 @@
 								<a href="#" onClick="prevImg();"> <img class="left_btn"
 									src="${ pageContext.request.contextPath }/resources/images/p_img_left_btn.png"
 									alt="이전">
-								</a> <img
-									src="${ pageContext.request.contextPath }/resources/images/ex_post_img1.jpg"
-									id="imgloc" alt="이미지" width="618" height="616"> <a
-									href="#" onClick="nextImg();"> <img class="right_btn"
+								</a> 
+								<img
+									src="resources/post/${list.img}"
+									id="imgloc" alt="이미지" width="618" height="616">
+								<a href="#" onClick="nextImg();"> <img class="right_btn"
 									src="${ pageContext.request.contextPath }/resources/images/p_img_right_btn.png"
 									alt="다음">
 								</a>

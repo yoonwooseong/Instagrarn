@@ -25,7 +25,6 @@
 	</script>
 </head>
 <body>
-<form name="f" method="get">
 <div class="all" style="top:0; right:0; left:0;">
 	<nav class="nav">
 		<div class="nav_div">
@@ -66,6 +65,6 @@
 		</div>
 	</div>
 </div>
-</form>
+
 </body>
 </html>

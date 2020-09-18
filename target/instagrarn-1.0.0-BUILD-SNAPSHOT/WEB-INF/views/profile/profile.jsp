@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Instagrarn</title>
+	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/profile.css">
 	
 	<script type="text/javascript">
@@ -13,6 +14,7 @@
 <body>
 
 <jsp:include page="../header.jsp"/>
+<img src="resources/upload/${ vo.filename }" width="200"/>
 
 <main class="page">
 저장됨

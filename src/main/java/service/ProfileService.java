@@ -18,8 +18,13 @@ public class ProfileService {
 		return res;
 	}
 
-	public List<ProfileVO> select(int user_idx) {
+	public List<ProfileVO> select(int user_idx) { 
 		List<ProfileVO> list = profile_dao.select(user_idx);
+		return list;
+	}
+	
+	public List<ProfileVO> select_post(int user_idx, int page) {
+		List<ProfileVO> list = profile_dao.select_post(user_idx, page);
 		return list;
 	}
 

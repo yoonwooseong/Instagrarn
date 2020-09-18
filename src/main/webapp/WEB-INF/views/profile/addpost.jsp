@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<html>
+<% request.setCharacterEncoding("euc-kr"); %>
+
 <head>
 	<title>Instagrarn</title>
-	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/profile.css">
+	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/addpost.css">
 	
 	<script type="text/javascript">
 		function post(){

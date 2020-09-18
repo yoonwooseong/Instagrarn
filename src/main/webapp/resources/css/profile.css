@@ -36,7 +36,8 @@ page{
 	height:150px;
 	position:absolute;
 	text-align:center;
-	left:50%;
+	margin-left:70px;
+	margin-right:70px;
 }
 
 .profile_text_box{
@@ -49,6 +50,48 @@ page{
 	width:100%;
 	height:40px;
 	margin-bottom:20px;
+	padding-top:5px;
+}
+.user_id{
+	font-weight: 100;
+	font-size: 28px;
+	line-height: 32px;
+	color:#4d4d4d;
+	float:left;
+}
+.profile_edit{
+	margin-left:20px;
+	width:94px;
+	height:30px;
+	float:left;
+	display:table;
+}
+.profile_edit_box{
+	text-align:center;
+	vertical-align:middle;
+	display:table-cell;
+	border-style:solid;
+	border-color:#DBDBDB;
+	border-width:thin;
+	border-radius:4px;
+}
+.profile_edit_text{
+	text-align:center;
+	vertical-align:middle;
+	display:table-cell;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    width: auto;
+    color:black;
+    font-size:14px;
+}
+.setting{
+	margin-left:5px;
+	width:40px;
+	height:40px;
+	float:left;
 }
 .profile_middle{
 	width:100%;
@@ -56,10 +99,44 @@ page{
 	margin-bottom:20px;
 	color: inherit;
 }
+
+.profile_middle_text{
+	
+}
+.post{
+	font-size: 16px;
+    margin-right: 40px;
+    float:left;
+    height:17px;
+}
+.post_num{
+	color: rgba(var(--i1d,38,38,38),1);
+    font-weight: 600;
+}
+.follow{
+	font-size: 16px;
+    margin-right: 40px;
+    float:left;
+    height:17px;
+}
+.follow_num{
+	color: rgba(var(--i1d,38,38,38),1);
+    font-weight: 600;
+}
+.following{
+	font-size: 16px;
+    margin-right: 40px;
+    float:left;
+    height:17px;
+}
+.following_num{
+	color: rgba(var(--i1d,38,38,38),1);
+    font-weight: 600;
+}
 .profile_last{
 	width:100%;
 	height:48px;
-	text-size:15px;
-	display: inline;
+	font-size:15px;
     font-weight: 600;
 }
+

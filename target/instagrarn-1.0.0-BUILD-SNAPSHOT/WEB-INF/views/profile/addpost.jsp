@@ -4,7 +4,8 @@
 <html>
 <head>
 	<title>Instagrarn</title>
-	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/profile.css">
+	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/addpost.css">
 	
 	<script type="text/javascript">
 		function post(){

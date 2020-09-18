@@ -25,10 +25,30 @@
 			</div>
 			<div class="profile_text_box">
 				<div class="profile_first">
-				U_Zin19
+					<div class="user_id">
+					u_zin19
+					</div>
+					<div class="profile_edit">
+						<div class="profile_edit_box">
+							<a class="profile_edit_text" href="/instagrarn/account/edit">프로필 편집</a>
+						</div>
+					</div>
+					<div class="setting">
+					<img src="${ pageContext.request.contextPath }/resources/images/setting.png" alt="setting_icon"
+						style="width:33px; height:33px; padding-left:8px;">
+					</div>
 				</div>
 				<div class="profile_middle">
-				게시물
+					<div class="post">
+						<span class="profile_middle_text">게시물<span class="post_num">12</span></span>
+						
+					</div>
+					<div class="follow">
+						<span class="profile_middle_text">팔로워<span class="follow_num">12</span></span>
+					</div>
+					<div class="following">
+						<span class="profile_middle_text">팔로워<span class="following_num">12</span></span>						
+					</div>
 				</div>
 				<div class="profile_last">
 				YUJIN

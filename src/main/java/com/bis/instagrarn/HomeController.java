@@ -58,6 +58,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/signup")
 	public String signup(UserVO vo) {
+		System.out.println(vo.getFullname());
 		int res = userService.signup(vo);
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}

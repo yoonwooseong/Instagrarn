@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <%@ page session="false" %>
 
 <html>
@@ -23,11 +25,6 @@
 			document.getElementById("user_tag").style="display:block";
 		}
 		
-		function post_click(count){
-			alert(count)
-			document.getElementById("post_info_"+count).style.background = "#00000070";
-			
-		}
 	</script>
 </head>
 <body>
@@ -76,7 +73,7 @@
 		</div>
 		
 		<div class="menu_bar">
-			<div class="menu_bar_size">
+			<div class="group_size">
 				<div class="group1" id="group1" style="border-top:1px solid rgba(var(--i1d,38,38,38),1);" onclick="btn_post();">
 					<div class="btn_post">
 					<img src="${ pageContext.request.contextPath }/resources/images/post.png" alt="myInfo" width="12" style="margin-top:1.5px;" class="btn_img">
@@ -91,44 +88,68 @@
 					</div>
 				</div>
 			</div>
-
+			<c:if test="${fn:length(list) != 0}">
+				<div class="group3" id="group3" onclick="location.href='/instagrarn/addpost'">
+				<img src="${ pageContext.request.contextPath }/resources/images/addpost.png" width="12"> 게시글 추가</div>
+			</c:if>
 		</div>
+		<c:if test="${fn:length(list) == 0}">
+		아직 업로드 된게 없음
+		</c:if>
 		
-		
-      <!-- 사진 두개만 마진주고 마지막은 안주게하기 -->
-		<div class="user_post1" id="user_post">
-			<c:forEach var="list" items="${list}" varStatus="status">
-				<c:choose>
-					<c:when test="${status.count % 3 == 0}">
-						<div id="post_info_img" style="float:left;" >
-						<img src="resources/post/${list.img}" width="293" height="293" style="margin-bottom:23px;"/></div>
-					</c:when>
-					<c:otherwise>
-						<div id="post_info_img" style="float:left;">
-						<img src="resources/post/${list.img}" width="293" height="293" style="margin-right:13px; margin-bottom:23px;"/></div>
-					</c:otherwise>
-				</c:choose>			
-			</c:forEach>
+		<c:if test="${fn:length(list) != 0}">
+			<div class="user_post1" id="user_post">
+				<c:forEach var="list" items="${list}" varStatus="status"> 
+					<!-- 사진 두개만 마진주고 마지막은 안주게하기 -->
+					<c:choose>
+						<c:when test="${status.count % 3 == 0}">
+							<div id="post_info_img" style="float:left;" >
+							<img src="resources/post/${list.img}" width="293" height="293" style="margin-bottom:23px;"/></div>
+						</c:when>
+						<c:otherwise>
+							<div id="post_info_img" style="float:left;">
+							<img src="resources/post/${list.img}" width="293" height="293" style="margin-right:23px; margin-bottom:23px;"/></div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			
-		<div class="user_post2" id="user_post">
-			<c:forEach var="list" items="${list}" varStatus="status">
-				<c:choose>
-					<c:when test="${status.count % 3 == 0}">
-						<div id="post_info_${status.count}" style="width:293px;height:293px;float:left;
-						background:#00000000; margin-bottom:23px;"onclick="post_click(${status.count});"></div>
-					</c:when>
-					<c:otherwise>
-						<div id="post_info_${status.count}" style="width:293px;height:293px;
-						margin-right:13px; float:left; background:#00000000; margin-bottom:23px;"onclick="post_click(${status.count});"></div>
-					</c:otherwise>
-				</c:choose>
-				
-			</c:forEach>
-		</div>
-		</div>
+				<div class="user_post_hover" id="user_post">
+					<c:forEach var="list" items="${list}" varStatus="status">
+						<c:choose>
+							<c:when test="${status.count % 3 == 0}">
+								<div class=post_info id="post_info_${status.count}" style="width:293px;height:293px;float:left; margin-bottom:23px;">
+									<div class="hover">
+										<div class="hover_box">
+											<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_heart.png" width="18" height="18" >
+											<div class="hover_text">2</div>  
+											<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_text.png" width="18" height="18" >
+											<div class="hover_text">2</div>
+										</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class=post_info id="post_info_${status.count}" style="width:293px;height:293px; margin-right:23px; float:left; margin-bottom:23px;">
+									<div class="hover2">
+										<div class="hover_box">
+											<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_heart.png" width="18" height="18" >
+											<div class="hover_text">2</div>  
+											<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_text.png" width="18" height="18" >
+											<div class="hover_text">2</div>
+										</div>
+									</div></div>
+							</c:otherwise>
+						</c:choose>
+						
+					</c:forEach>
+				</div>
+			</div>
+		</c:if>	
+		
 		<div class="user_tag" id="user_tag" style="display:none;">
 			아직 태그된게 없음
 		</div>
+		
 	</div>
 </main>
 

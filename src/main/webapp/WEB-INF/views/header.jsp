@@ -15,7 +15,7 @@
 			document.getElementById("heart_icon").src="${ pageContext.request.contextPath }/resources/images/IconHeart.png"
 			document.getElementById("nav_alert_news").style.display="none";
 			break;
-		case "none": 
+		case "none": case "":
 			document.getElementById("home_icon").src="${ pageContext.request.contextPath }/resources/images/Home.png"
 			document.getElementById("heart_icon").src="${ pageContext.request.contextPath }/resources/images/IconHeart2.png"
 			document.getElementById("nav_alert_news").style.display="block";
@@ -71,7 +71,7 @@
 		</div>
 		</div>
 	</nav>
-	<div id="nav_alert_news" class="nav_alert_news" style="display:none;">
+	<div id="nav_alert_news" class="nav_alert_news">
 			하이
 	</div>
 	<div class="profile" id="profile" style="display:none;">

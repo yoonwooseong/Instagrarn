@@ -54,9 +54,10 @@ public class ProfileDAO {
 	}
 
 	public List<ProfileVO> select_post(int user_idx, int page) {
-		int set_page = page * 5;
+		int set_page = page * 3;
+		System.out.println("페이지머냐"+set_page);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + page + ", 5";
+		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + set_page + ", 3";
 		
 		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
 

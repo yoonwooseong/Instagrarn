@@ -87,7 +87,7 @@ public class ProfileController {
 		int user_idx = 1;
 		List<ProfileVO> list = profileService.select(user_idx);
 		
-		
+		model.addAttribute("post_num", list.size());
 		model.addAttribute("list", list);
 		
 

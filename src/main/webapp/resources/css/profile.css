@@ -74,12 +74,8 @@ page{
 	border-radius:4px;
 }
 .profile_edit_text{
-	text-align:center;
-	vertical-align:middle;
-	display:table-cell;
     box-sizing: border-box;
     cursor: pointer;
-    display: block;
     font-weight: 600;
     width: auto;
     color:black;
@@ -192,9 +188,14 @@ page{
 	float:left;
 }
 
-.user_post{
-   margin-bottom:28px;
+.user_post1{overflow:auto;
+	position:relative;
+	margin-bottom:28px;
 }
+.user_post2{overflow:auto;
+	position:absolute; margin-top: 0; margin-left:0;z-index:4;
+}
+
 
 .user_tag{
 	text-align:center;

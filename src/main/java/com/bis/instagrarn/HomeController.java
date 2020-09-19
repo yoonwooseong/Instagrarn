@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.Common;
 import service.ProfileService;
@@ -38,19 +39,22 @@ public class HomeController {
 	ProfileService profileService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model, @RequestParam(value="page", defaultValue="0")int page) {
+	public String main(Model model) {
 		int user_idx = 1;
-		List<ProfileVO> list = profileService.select_post(user_idx, page);
-		model.addAttribute("list", list);
+		List<ProfileVO> list = profileService.select_post(user_idx, 0);
+		model.addAttribute("loadlist", list);
+		System.out.println(list.get(0).getImg());
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}
 	
 	@RequestMapping(value = "/loadpost", method = RequestMethod.GET)
-	public String loadpost(Model model, @RequestParam(value="page", defaultValue="0")int page) {
+	@ResponseBody
+	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
 		int user_idx = 1;
+		System.out.println(page);
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
-		model.addAttribute("list", list);
-		return Common.Board.VIEW_PATH + "main.jsp";
+		
+		return list;
 	}
 	
 	@RequestMapping(value = {"/", "/loginpage"})
@@ -70,7 +74,7 @@ public class HomeController {
 			System.out.println("로그인 실패");
 		}
 		
-		return Common.Board.VIEW_PATH + "main.jsp";
+		return "redirect:main";
 	}
 	
 	@RequestMapping(value =  "/signuppage")

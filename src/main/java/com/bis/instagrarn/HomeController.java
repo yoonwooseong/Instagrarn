@@ -1,14 +1,13 @@
 package com.bis.instagrarn;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +22,6 @@ import service.UserService;
 import vo.ProfileVO;
 import vo.UserVO;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 	
@@ -37,6 +33,9 @@ public class HomeController {
 	
 	@Autowired
 	ProfileService profileService;
+	
+	@Autowired
+	HttpServletRequest request;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -82,22 +81,79 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/", "/loginpage"})
 	public String loginpage() {
+		
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
+	@RequestMapping("/cookie_check")
+	@ResponseBody
+	public String first() {
+		Cookie[] cookies = request.getCookies();
+		String user_id_info = "";
+		if(cookies == null) {
+			return Common.User.VIEW_PATH + "login.jsp";
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					
+					user_id_info = session_info.getId();
+				}
+			}
+		}
+		System.out.println(user_id_info);
+		return user_id_info;
+	}
+	
 	@RequestMapping(value = "/login")
-	public String login(UserVO vo) {
+	public String login(UserVO vo, HttpServletResponse response) {
+
 		UserVO login_vo = userService.signin(vo);
 		if( login_vo != null ) {
+			
+			//로그인 성공할때만 전에 저장해둔 정보들 지우기
+			Cookie[] cookies = request.getCookies();
+			String user_id_info = "";
+			if(cookies == null) {
+				return Common.User.VIEW_PATH + "login.jsp";
+			}else {
+				for (Cookie cookie : cookies) {
+					if("rememberSession".equals(cookie.getName())) {
+
+						HttpSession session = request.getSession();
+						session.removeAttribute(cookie.getValue());
+						cookie.setValue(null);
+					}
+				}
+			}
+			
 			int idx = login_vo.getIdx();
 			String fullname = login_vo.getFullname();
 			String id = login_vo.getId();
 			System.out.println(fullname+"님 로그인 성공");
+			
+			//그러고 나서 새로운 로그인 정보 세션저장
+			HttpSession session = request.getSession();
+			
+			Common com = new Common();
+			
+			String sessionKey = com.sessonKey();
+
+			session.setAttribute(sessionKey, login_vo);
+			
+			Cookie cookie= new Cookie("rememberSession", sessionKey);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24*7);//일주일간 가게
+			response.addCookie(cookie);
+			
 		} else {
 			System.out.println("로그인 실패");
 		}
 		return "redirect:main";
 	}
+
 	
 	@RequestMapping(value =  "/signuppage")
 	public String signuppage() {

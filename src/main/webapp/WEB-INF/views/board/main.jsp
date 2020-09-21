@@ -47,6 +47,34 @@
 		}
 	};
 
+	function like(board_idx){
+		var btn_like = document.getElementById("btn_like").src;
+		var param = "board_idx=" + board_idx;
+		if(btn_like.includes('_click')){
+			var url = "clickUnLike";//-1
+		} else{
+			var url = "clickLike";//+1
+		}
+		sendRequest(url, param, resultClickLike, "GET");
+	}
+	
+	function resultClickLike(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var btn_like = document.getElementById("btn_like").src;
+			var likeView = document.getElementById("likeView");
+			var num = likeView.innerHTML.replace("좋아요 ","").replace("개","");
+			if(btn_like.includes('_click')){
+				addLikeNumber = Number(num)-1;
+				document.getElementById("btn_like").src = "${ pageContext.request.contextPath }/resources/images/post_button1.png";
+			}else{
+				addLikeNumber = Number(num)+1;
+				document.getElementById("btn_like").src = "${ pageContext.request.contextPath }/resources/images/post_button1_click.png";
+			}
+			
+			likeView.innerHTML = "좋아요 "+addLikeNumber+"개";
+		}
+	}
+	
 	function nextImg() {
 		num++;
 		if (num > 4) {
@@ -76,7 +104,6 @@
 				<li class="one_post">
 					<c:forEach var="loadlist" items="${loadlist}">
 						<div class="article">
-						
 							<article class="article2">
 								<header class="header_title">
 									<div class="post_icon">
@@ -105,16 +132,9 @@
 									<section class="post_buttons">
 	
 										<div class="post_buttons_left">
-											<a href="#"> <img
-												src="${ pageContext.request.contextPath }/resources/images/post_button1.png"
-												alt="like">
-											</a> <a href="#"> <img
-												src="${ pageContext.request.contextPath }/resources/images/post_button2.png"
-												alt="comment">
-											</a> <a href="#"> <img
-												src="${ pageContext.request.contextPath }/resources/images/post_button3.png"
-												alt="arrow">
-											</a>
+											<img id="btn_like" src="${ pageContext.request.contextPath }/resources/images/post_button1.png" alt="like" onclick="like(${loadlist.board_idx});">
+											<img src="${ pageContext.request.contextPath }/resources/images/post_button2.png" alt="comment">
+											<img src="${ pageContext.request.contextPath }/resources/images/post_button3.png" alt="arrow">
 										</div>
 	
 										<div class="post_button_right">
@@ -126,7 +146,7 @@
 	
 									</section>
 									<section class="post_like">
-										<a href="#">좋아요 n개</a>
+										<a href="#" id="likeView">좋아요 ${loadlist.like_num}개</a>
 									</section>
 								</div>
 								<div>

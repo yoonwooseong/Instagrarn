@@ -1,4 +1,4 @@
-﻿function addscroll(img, content){
+﻿function addscroll(img, content, like_num){
 	console.log('src="resources/post/'+img +'"');
 	var addones = '<div class="article">'+
 		'<article class="article2">'+
@@ -19,7 +19,7 @@
 				'<section class="post_buttons">'+
 
 					'<div class="post_buttons_left">'+
-						'<a href="#"><img src="resources/images/post_button1.png" alt="like"></a>'+
+						'<img id="btn_like" src="${ pageContext.request.contextPath }/resources/images/post_button1.png" alt="like" onclick="like(${loadlist.board_idx});">'+
 						'<a href="#"><img src="resources/images/post_button2.png" alt="comment"></a>'+
 						'<a href="#"><img src="resources/images/post_button3.png" alt="arrow"></a>'+
 					'</div>'+
@@ -29,7 +29,7 @@
 					'</div>'+
 
 				'</section>'+
-				'<section class="post_like"><a href="#">좋아요 n개</a></section>'+
+				'<section class="post_like"><a href="#">좋아요 '+like_num+'개</a></section>'+
 			'</div>'+
 			'<div>'+
 				'<div class="post_content">'+

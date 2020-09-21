@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -56,7 +57,6 @@ public class ProfileDAO {
 
 	public List<ProfileVO> select_post(int user_idx, int page) {
 		int set_page = page * 3;
-		System.out.println("페이지머냐"+set_page);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + set_page + ", 3";
 		
@@ -70,11 +70,31 @@ public class ProfileDAO {
 						rs.getString("img"),
 						rs.getString("content"),
 						rs.getString("area"),
-						rs.getInt("like_num")); 
+						rs.getInt("like_num"));
+				
+				list.setIsLike(false);
 				return list;
 			}
 			
 		});
+		return list;
+	}
+	
+	public List<Integer> select_like(int user_idx) {
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select board_idx from Insta_likes where user_idx = '" + user_idx + "'";
+		
+		List<Integer> list =jdbcTemplate.query(sql, new RowMapper<Integer>() {
+
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int board = rs.getInt("board_idx");
+				return board;
+			}
+			
+		});
+		
 		return list;
 	}
 	
@@ -83,6 +103,16 @@ public class ProfileDAO {
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		int res = jdbcTemplate.update(sql);
+		
+		return res;
+	}
+	
+	public int clicked_like_DB(int board_idx, int user_idx){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		int res = jdbcTemplate.update("insert into Insta_likes (idx, user_idx, board_idx) "
+				+ "VALUES (0, ?, ?)", user_idx, board_idx);
 		
 		return res;
 	}
@@ -96,4 +126,12 @@ public class ProfileDAO {
 		return res;
 	}
 	
+	public int clicked_unlike_DB(int board_idx, int user_idx){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		int res = jdbcTemplate.update("DELETE FROM Insta_likes WHERE user_idx = ? AND board_idx = ?", user_idx, board_idx);
+		
+		return res;
+	}
 }

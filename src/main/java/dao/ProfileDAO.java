@@ -45,7 +45,8 @@ public class ProfileDAO {
 						rs.getInt("user_idx"),
 						rs.getString("img"),
 						rs.getString("content"),
-						rs.getString("area"));
+						rs.getString("area"),
+						rs.getInt("like_num"));
 				return list;
 			}
 			
@@ -68,12 +69,31 @@ public class ProfileDAO {
 						rs.getInt("user_idx"),
 						rs.getString("img"),
 						rs.getString("content"),
-						rs.getString("area"));
+						rs.getString("area"),
+						rs.getInt("like_num")); 
 				return list;
 			}
 			
 		});
 		return list;
+	}
+	
+	public int clicked_like(int board_idx) {
+		String sql = "update Insta_board set like_num = like_num + 1 where board_idx=" + board_idx;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.update(sql);
+		
+		return res;
+	}
+	
+	public int unclicked_like(int board_idx) {
+		String sql = "update Insta_board set like_num = like_num - 1 where board_idx=" + board_idx;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.update(sql);
+		
+		return res;
 	}
 	
 }

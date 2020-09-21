@@ -14,6 +14,7 @@
 
 	var num = 1;
 	var path = "${ pageContext.request.contextPath }/resources/images/ex_post_img";
+	
 	var page_count = 1;
 	window.onscroll = function(ev) {
 		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight
@@ -37,8 +38,9 @@
 						var img = json[i].img;
 						var content = json[i].content;
 						var area = json[i].area;
+						var like_num = json[i].like_num;
 						var one = document.createElement('li');
-						var ones = addscroll(img, content);
+						var ones = addscroll(img, content, like_num);
 						one.innerHTML = ones;
 						lists.appendChild(one);
 					}

@@ -49,10 +49,23 @@ public class HomeController {
 	@ResponseBody
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
 		int user_idx = 1;
-		System.out.println(page);
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
 		
 		return list;
+	}
+	
+	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
+	@ResponseBody
+	public int clickLike(Model model, int board_idx) {
+		int res = profileService.clicked_like(board_idx);
+		return res;
+	}
+	
+	@RequestMapping(value = "/clickUnLike", method = RequestMethod.GET)
+	@ResponseBody
+	public int clickUnLike(Model model, int board_idx) {
+		int res = profileService.unclicked_like(board_idx);
+		return res;
 	}
 	
 	@RequestMapping(value = {"/", "/loginpage"})

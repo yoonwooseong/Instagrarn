@@ -27,7 +27,17 @@ public class ProfileService {
 		List<ProfileVO> list = profile_dao.select_post(user_idx, page);
 		return list;
 	}
+	
+	public int clicked_like(int board_idx) {
+		int res = profile_dao.clicked_like(board_idx);
+		return res;
+	}
+	
+	public int unclicked_like(int board_idx) {
+		int res = profile_dao.unclicked_like(board_idx);
+		return res;
+	}
 
-
+	
 
 }

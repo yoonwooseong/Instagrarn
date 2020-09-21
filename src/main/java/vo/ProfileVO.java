@@ -6,10 +6,12 @@ public class ProfileVO {
 	MultipartFile file;
 	private int board_idx, user_idx, like_num;
 	private String img, content, area;
+	private Boolean isLike;
 	
 	public ProfileVO() {
 		
 	}
+	
 	
 	public ProfileVO(int board_idx, int user_idx, String img, String content, String area, int like_num) {
 		this.board_idx = board_idx;
@@ -20,6 +22,15 @@ public class ProfileVO {
 		this.like_num = like_num;
 	}
 	
+	
+	public Boolean getIsLike() {
+		return isLike;
+	}
+	
+	public void setIsLike(Boolean isLike) {
+		this.isLike = isLike;
+	}
+
 	public int getLike_num() {
 		return like_num;
 	}

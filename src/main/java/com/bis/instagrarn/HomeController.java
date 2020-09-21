@@ -42,8 +42,17 @@ public class HomeController {
 	public String main(Model model) {
 		int user_idx = 1;
 		List<ProfileVO> list = profileService.select_post(user_idx, 0);
+		List<Integer> likelist = profileService.select_like(user_idx);
+		
+		for(int i = 0; i<list.size(); i++) {
+			if(likelist.contains(list.get(i).getBoard_idx())) {
+				list.get(i).setIsLike(true);
+			} else {
+				list.get(i).setIsLike(false);
+			}
+		}
 		model.addAttribute("loadlist", list);
-
+		model.addAttribute("likelist", likelist);
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}
 	
@@ -52,22 +61,23 @@ public class HomeController {
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
 		int user_idx = 1;
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
-		
 		return list;
 	}
 	
 	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
-		int res = profileService.clicked_like(board_idx);
-		return res;
+		int user_idx = 1;
+		int res = profileService.clicked_like(board_idx, user_idx);
+		return board_idx;
 	}
 	
 	@RequestMapping(value = "/clickUnLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickUnLike(Model model, int board_idx) {
-		int res = profileService.unclicked_like(board_idx);
-		return res;
+		int user_idx = 1;
+		int res = profileService.unclicked_like(board_idx, user_idx);
+		return board_idx;
 	}
 	
 	@RequestMapping(value = {"/", "/loginpage"})
@@ -86,7 +96,6 @@ public class HomeController {
 		} else {
 			System.out.println("로그인 실패");
 		}
-		
 		return "redirect:main";
 	}
 	

@@ -50,7 +50,8 @@
 	};
 
 	function like(board_idx){
-		var btn_like = document.getElementById("btn_like").src;
+		alert("여기");
+		var btn_like = document.getElementById("btn_like_"+board_idx).src;
 		var param = "board_idx=" + board_idx;
 		if(btn_like.includes('_click')){
 			var url = "clickUnLike";//-1
@@ -62,15 +63,16 @@
 	
 	function resultClickLike(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			var btn_like = document.getElementById("btn_like").src;
+			var data = xhr.responseText;
+			var btn_like = document.getElementById("btn_like_"+data).src;
 			var likeView = document.getElementById("likeView");
 			var num = likeView.innerHTML.replace("좋아요 ","").replace("개","");
 			if(btn_like.includes('_click')){
 				addLikeNumber = Number(num)-1;
-				document.getElementById("btn_like").src = "${ pageContext.request.contextPath }/resources/images/post_button1.png";
+				document.getElementById("btn_like_"+data).src = "${ pageContext.request.contextPath }/resources/images/post_button1.png";
 			}else{
 				addLikeNumber = Number(num)+1;
-				document.getElementById("btn_like").src = "${ pageContext.request.contextPath }/resources/images/post_button1_click.png";
+				document.getElementById("btn_like_"+data).src = "${ pageContext.request.contextPath }/resources/images/post_button1_click.png";
 			}
 			
 			likeView.innerHTML = "좋아요 "+addLikeNumber+"개";
@@ -134,7 +136,12 @@
 									<section class="post_buttons">
 	
 										<div class="post_buttons_left">
-											<img id="btn_like" src="${ pageContext.request.contextPath }/resources/images/post_button1.png" alt="like" onclick="like(${loadlist.board_idx});">
+										<c:if test="${loadlist.isLike eq true}">
+											<img id="btn_like_${loadlist.board_idx}" src="${ pageContext.request.contextPath }/resources/images/post_button1_click.png" alt="like" onclick="like(${loadlist.board_idx});">
+										</c:if>
+										<c:if test="${loadlist.isLike eq false}">
+											<img id="btn_like_${loadlist.board_idx}" src="${ pageContext.request.contextPath }/resources/images/post_button1.png" alt="like" onclick="like(${loadlist.board_idx});">
+										</c:if>
 											<img src="${ pageContext.request.contextPath }/resources/images/post_button2.png" alt="comment">
 											<img src="${ pageContext.request.contextPath }/resources/images/post_button3.png" alt="arrow">
 										</div>

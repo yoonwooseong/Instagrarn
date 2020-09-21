@@ -28,13 +28,20 @@ public class ProfileService {
 		return list;
 	}
 	
-	public int clicked_like(int board_idx) {
+	public List<Integer> select_like(int user_idx) {
+		List<Integer> list = profile_dao.select_like(user_idx);
+		return list;
+	}
+	
+	public int clicked_like(int board_idx, int user_idx) {
 		int res = profile_dao.clicked_like(board_idx);
+		int res2 = profile_dao.clicked_like_DB(board_idx, user_idx);
 		return res;
 	}
 	
-	public int unclicked_like(int board_idx) {
+	public int unclicked_like(int board_idx, int user_idx) {
 		int res = profile_dao.unclicked_like(board_idx);
+		int res2 = profile_dao.clicked_unlike_DB(board_idx, user_idx);
 		return res;
 	}
 

@@ -24,7 +24,7 @@
 				<img src="${ pageContext.request.contextPath }/resources/images/insta_title.png" alt="Home" height="60">
 				<form action="login" method="post" name="f">
 					<input name="phone" class="text" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="전화번호, 사용자 이름 또는 이메일">
-					<input name="pwd" class="text" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
+					<input type="password" name="pwd" class="text" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
 					<input class="signin_btn" type="button" style="width:270px;height:30px; background-color: #B2DFFC;" value="로그인" onclick="send();">
 				</form>
 			</div>			

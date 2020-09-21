@@ -23,7 +23,7 @@ public class ProfileDAO {
 		String content = vo.getContent();
 		String area = vo.getArea();
 		String img = vo.getImg();
-		int user_idx = 1;
+		int user_idx = vo.getUser_idx();
 		System.out.println(area);
 		
 		int res = jdbcTemplate.update("insert into Insta_board (board_idx, user_idx, content, img, area) "

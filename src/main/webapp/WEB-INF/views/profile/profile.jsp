@@ -42,7 +42,7 @@
 			<div class="profile_text_box">
 				<div class="profile_first">
 					<div class="user_id">
-					u_zin19
+					${user_id}
 					</div>
 					<div class="profile_edit">
 						<div class="profile_edit_box">
@@ -56,18 +56,18 @@
 				</div>
 				<div class="profile_middle">
 					<div class="post">
-						<span class="profile_middle_text">게시물<span class="post_num">${post_num}</span></span>
+						<span class="profile_middle_text">게시물<span class="post_num"> ${post_num}</span></span>
 						
 					</div>
 					<div class="follow">
-						<span class="profile_middle_text">팔로워<span class="follow_num">12</span></span>
+						<span class="profile_middle_text">팔로워<span class="follow_num"> 12</span></span>
 					</div>
 					<div class="following">
-						<span class="profile_middle_text">팔로워<span class="following_num">12</span></span>						
+						<span class="profile_middle_text">팔로워<span class="following_num"> 12</span></span>						
 					</div>
 				</div>
 				<div class="profile_last">
-				YUJIN
+				${user_fullname }
 				</div>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 				<div class="group2" id="group2" onclick="btn_tag();">
 					<div class="btn_post">
 					<img src="${ pageContext.request.contextPath }/resources/images/post_button4.png" alt="myInfo" height="15" class="btn_img">
-					<div class="btn_text">태그됨</div>
+					<div class="btn_text">저장됨</div>
 					</div>
 				</div>
 			</div>
@@ -94,11 +94,15 @@
 			</c:if>
 		</div>
 		<c:if test="${fn:length(list) == 0}">
-		아직 업로드 된게 없음
+			<div class="user_post1" id="user_post">
+				<img class="user_post_img" src="${ pageContext.request.contextPath }/resources/images/camera.png" width="62">
+				<div class="user_post_text">사진 업로드</div>
+				<input class="user_post_btn" type="button" value="업로드" onclick="location.href='/instagrarn/addpost'">
+			</div>
 		</c:if>
 		
 		<c:if test="${fn:length(list) != 0}">
-			<div class="user_post1" id="user_post">
+			<div class="user_post2" id="user_post">
 				<c:forEach var="list" items="${list}" varStatus="status"> 
 					<!-- 사진 두개만 마진주고 마지막은 안주게하기 -->
 					<c:choose>
@@ -140,14 +144,13 @@
 									</div></div>
 							</c:otherwise>
 						</c:choose>
-						
 					</c:forEach>
 				</div>
 			</div>
 		</c:if>	
 		
 		<div class="user_tag" id="user_tag" style="display:none;">
-			아직 태그된게 없음
+			아직 저장된게 없음
 		</div>
 		
 	</div>

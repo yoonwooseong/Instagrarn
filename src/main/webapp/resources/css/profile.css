@@ -50,7 +50,15 @@ page{margin: 55px auto; padding-top:25px;}
 .btn_img{float:left;}
 .btn_text{margin-left:6px; font-size:12px; font-weight:600; float:left;}
 
-.user_post1{overflow:auto; position:relative; margin-bottom:28px;}
+.user_post1{text-align:center;}
+.user_post_img{margin-top:60px;}
+.user_post_text{margin-top:30px; font-weight: 300; font-size:28px;}
+.user_post_btn{margin-top:28px; width:98px; height:30px; font-weight:600; font-size:14px; color:white; border:0 ;background:#0095f6; border-radius:8px;
+				box-shadow: 0 0 4px #999; outline:none; background-position:center; transition: background 0.4s; cursor: pointer;}
+.user_post_btn:hover {background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;}
+.user_post_btn:active {background-color:#6eb9f7; background-size:100%; transition:background 0s;}
+
+.user_post2{overflow:auto; position:relative; margin-bottom:28px;}
 .user_post_hover{overflow:auto; position:absolute; margin-top:0; margin-left:0;z-index:4;}
 
 .hover{width:293px;height:293px; background:#00000000;}

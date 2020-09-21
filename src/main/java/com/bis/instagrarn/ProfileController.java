@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.Common;
 import service.ProfileService;
 import vo.ProfileVO;
-import vo.UploadVO;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class ProfileController {
 	
@@ -76,21 +73,21 @@ public class ProfileController {
 				e.printStackTrace();
 			}
 		}//if
-
-		
-
 		return "redirect:profile";
 	}
 	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(Model model) {
+	public String profile(Model model, HttpSession session) {
 		int user_idx = 1;
 		List<ProfileVO> list = profileService.select(user_idx);
 		
 		model.addAttribute("post_num", list.size());
 		model.addAttribute("list", list);
 		
-
+		String id = (String)session.getAttribute("id");
+		System.out.println("과연");
+		System.out.println("로그인된 아이디 " + id);
+		
 		return Common.Profile.VIEW_PATH + "profile.jsp";
 	}
 	

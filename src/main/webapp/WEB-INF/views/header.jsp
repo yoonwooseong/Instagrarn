@@ -78,6 +78,10 @@
 		<div class="user_profile">
 		<a href="/instagrarn/profile" style="color:black;">프로필</a>
 		</div>
+		<hr>
+		<div class="/instagrarn/logout">
+		<a href="/instagrarn/logout" style="color:black;">로그아웃</a>
+		</div>
 	</div>
 	
 </div>

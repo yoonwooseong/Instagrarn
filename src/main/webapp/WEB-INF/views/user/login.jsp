@@ -8,7 +8,21 @@
 	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/login.css">
 
+	<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/httpRequest.js"></script>
 	<script type="text/javascript">
+	
+	 window.onload=function first() {
+			var url = "first";
+			sendRequest(url, null, resultFn, "get");
+		}
+		function resultFn() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var data = xhr.responseText;
+			
+				alert(data);
+			}
+		}
+	
 		function send(){
 			var f = document.f;
 			f.submit();

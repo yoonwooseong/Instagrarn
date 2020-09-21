@@ -57,6 +57,7 @@ public class HomeController {
 	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
+		System.out.println("옴옴ㅁ옴오몽");
 		int res = profileService.clicked_like(board_idx);
 		return res;
 	}
@@ -74,22 +75,21 @@ public class HomeController {
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
-	@RequestMapping("/first")
+	@RequestMapping("/cookie_check")
 	@ResponseBody
 	public String first() {
 		Cookie[] cookies = request.getCookies();
 		String user_id_info = "";
 		if(cookies == null) {
-			System.out.println("로그인 된 정보 없음");
+			return Common.User.VIEW_PATH + "login.jsp";
 		}else {
 			for (Cookie cookie : cookies) {
 				if("rememberSession".equals(cookie.getName())) {
-					System.out.println("쿠키이름 : " +cookie.getName() + "값 : "+ cookie.getValue());
+
 					HttpSession session = request.getSession();
-					UserVO session_info = (UserVO) session.getAttribute(cookie.getValue());
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
 					
 					user_id_info = session_info.getId();
-					
 				}
 			}
 		}
@@ -99,27 +99,44 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login")
 	public String login(UserVO vo, HttpServletResponse response) {
-		
+
 		UserVO login_vo = userService.signin(vo);
 		if( login_vo != null ) {
+			
+			//로그인 성공할때만 전에 저장해둔 정보들 지우기
+			Cookie[] cookies = request.getCookies();
+			String user_id_info = "";
+			if(cookies == null) {
+				return Common.User.VIEW_PATH + "login.jsp";
+			}else {
+				for (Cookie cookie : cookies) {
+					if("rememberSession".equals(cookie.getName())) {
+
+						HttpSession session = request.getSession();
+						session.removeAttribute(cookie.getValue());
+						cookie.setValue(null);
+					}
+				}
+			}
+			
 			int idx = login_vo.getIdx();
 			String fullname = login_vo.getFullname();
 			String id = login_vo.getId();
 			System.out.println(fullname+"님 로그인 성공");
 			
+			//그러고 나서 새로운 로그인 정보 세션저장
 			HttpSession session = request.getSession();
+			
 			Common com = new Common();
 			
 			String sessionKey = com.sessonKey();
-			
+
 			session.setAttribute(sessionKey, login_vo);
-			System.out.println("session : " + session.getAttribute(sessionKey));
 			
 			Cookie cookie= new Cookie("rememberSession", sessionKey);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);//일주일간 가게
 			response.addCookie(cookie);
-			System.out.println("cookie : " + cookie.getValue());
 			
 		} else {
 			System.out.println("로그인 실패");
@@ -127,14 +144,7 @@ public class HomeController {
 		
 		return "redirect:main";
 	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("id");
-		System.out.println(session.getAttribute("id"));
-		
-		return Common.User.VIEW_PATH + "login.jsp";
-	}
+
 	
 	@RequestMapping(value =  "/signuppage")
 	public String signuppage() {

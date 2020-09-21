@@ -80,7 +80,7 @@
 		</div>
 		<hr>
 		<div class="/instagrarn/logout">
-		<a href="/instagrarn/logout" style="color:black;">로그아웃</a>
+		<a href="/instagrarn/" style="color:black;">로그아웃</a>
 		</div>
 	</div>
 	

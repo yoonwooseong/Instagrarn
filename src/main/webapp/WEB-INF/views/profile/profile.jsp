@@ -42,7 +42,7 @@
 			<div class="profile_text_box">
 				<div class="profile_first">
 					<div class="user_id">
-					u_zin19
+					${user_id}
 					</div>
 					<div class="profile_edit">
 						<div class="profile_edit_box">
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				<div class="profile_last">
-				YUJIN
+				${user_fullname }
 				</div>
 			</div>
 		</div>

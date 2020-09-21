@@ -55,6 +55,7 @@
 		} else{
 			var url = "clickLike";//+1
 		}
+		alert(url);
 		sendRequest(url, param, resultClickLike, "GET");
 	}
 	

@@ -72,7 +72,12 @@
 		</div>
 	</nav>
 	<div id="nav_alert_news" class="nav_alert_news">
-			하이
+		<ul>
+			<li>
+				95wooseong<br>
+				님이 회원님의 게시물에 좋아요를 눌렀습니다.
+			</li>
+		</ul>
 	</div>
 	<div class="profile" id="profile" style="display:none;">
 		<div class="user_profile">

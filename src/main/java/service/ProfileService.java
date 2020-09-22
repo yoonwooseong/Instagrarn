@@ -36,6 +36,7 @@ public class ProfileService {
 	public int clicked_like(int board_idx, int user_idx) {
 		int res = profile_dao.clicked_like(board_idx);
 		int res2 = profile_dao.clicked_like_DB(board_idx, user_idx);
+		//여기에 알람DB에 추가
 		return res;
 	}
 	

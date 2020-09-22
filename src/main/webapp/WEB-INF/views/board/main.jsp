@@ -197,7 +197,7 @@
 								</a>
 							</div>
 							<div class="user_info_name_id">
-								<span class="user_info_id">95wooseong</span> <br>우성
+								<span class="user_info_id">${user_info_id}</span> <br>${user_info_fullname}
 							</div>
 						</div>
 

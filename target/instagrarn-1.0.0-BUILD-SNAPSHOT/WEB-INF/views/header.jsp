@@ -54,7 +54,7 @@
 		</div>
 		<div class="nav_menu_div">
 			<div class="nav_menu">
-				<a href="home.jsp">
+				<a href="main">
 					<img src="${ pageContext.request.contextPath }/resources/images/Home2.png" alt="Home"  id="home_icon">
 				</a>
 				<a href="#">

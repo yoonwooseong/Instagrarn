@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProfileVO {
@@ -7,6 +9,7 @@ public class ProfileVO {
 	private int board_idx, user_idx, like_num;
 	private String img, content, area;
 	private Boolean isLike;
+	private List replys;
 	
 	public ProfileVO() {
 		
@@ -23,6 +26,16 @@ public class ProfileVO {
 	}
 	
 	
+	public List getReplys() {
+		return replys;
+	}
+
+
+	public void setReplys(List replys) {
+		this.replys = replys;
+	}
+
+
 	public Boolean getIsLike() {
 		return isLike;
 	}

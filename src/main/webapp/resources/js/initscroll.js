@@ -1,5 +1,4 @@
-﻿function addscroll(img, content, like_num){
-	console.log('src="resources/post/'+img +'"');
+﻿function addscroll(data){
 	var addones = '<div class="article">'+
 		'<article class="article2">'+
 			'<header class="header_title">'+
@@ -12,16 +11,21 @@
 			'<div class="post_img">'+
 				'<a href="#" onClick="prevImg();"><img class="left_btn" src="resources/images/p_img_left_btn.png" alt="이전">'+
 				//'</a><img src="resources/images/dd.PNG" id="imgloc" alt="이미지" width="618" height="616"><a href="#" onClick="nextImg();"><img class="right_btn" src="resources/images/p_img_right_btn.png" alt="다음">'+
-				'</a><img src="resources/post/'+img +'" id="imgloc" alt="이미지" width="618" height="616"><a href="#" onClick="nextImg();"><img class="right_btn" src="resources/images/p_img_right_btn.png" alt="다음">'+
+				'</a><img src="resources/post/'+data.img +'" id="imgloc" alt="이미지" width="618" height="616"><a href="#" onClick="nextImg();"><img class="right_btn" src="resources/images/p_img_right_btn.png" alt="다음">'+
 				'</a>'+
 			'</div>'+
 			'<div>'+
 				'<section class="post_buttons">'+
 
 					'<div class="post_buttons_left">'+
-						'<img id="btn_like" src="${ pageContext.request.contextPath }/resources/images/post_button1.png" alt="like" onclick="like(${loadlist.board_idx});">'+
-						'<a href="#"><img src="resources/images/post_button2.png" alt="comment"></a>'+
-						'<a href="#"><img src="resources/images/post_button3.png" alt="arrow"></a>'+
+						'<c:if test="${loadlist.isLike eq true}">'+
+							'<img id="btn_like_'+data.board_idx+'" src="resources/images/post_button1_click.png" alt="like" onclick="like('+data.board_idx+');">'+
+						'</c:if>'+
+						'<c:if test="${loadlist.isLike eq false}">'+
+							'<img id="btn_like_'+data.board_idx+'" src="resources/images/post_button1.png" alt="like" onclick="like('+data.board_idx+');">'+
+						'</c:if>'+
+						'<img src="resources/images/post_button2.png" alt="comment">'+
+						'<img src="resources/images/post_button3.png" alt="arrow">'+
 					'</div>'+
 
 					'<div class="post_button_right">'+
@@ -29,25 +33,20 @@
 					'</div>'+
 
 				'</section>'+
-				'<section class="post_like"><a href="#">좋아요 '+like_num+'개</a></section>'+
+				'<section class="post_like"><a href="#">좋아요 '+data.like_num+'개</a></section>'+
 			'</div>'+
 			'<div>'+
 				'<div class="post_content">'+
 					'<div class="post_content_header">'+
-						'<span>wooseong2</span> '+content+
-					'</div>'+
-					'<div class="post_content_more_button">'+
-						'<a href="#">더보기</a>'+
+						'<span>wooseong2</span> '+data.content+
 					'</div>'+
 				'</div>'+
 				'<div class="post_comment">'+
-					'<div class="post_comment_more_button">'+
-						'<a href="#">댓글 n개 모두 보기</a>'+
-					'</div>'+
-					'<div class="post_comment_headers">'+
-						'<span>95wooseong</span> 첫번째 댓글이답!<br> <span>5you_bin</span>'+
-						'두번째 댓글인데욤..<br>'+
-					'</div>'+
+					'<ul id="post_comment_headers_'+data.board_idx+'">'+
+						'<c:forEach var="replylist" items="'+data.replylist+'">'+
+							'<li><b>${replylist[0]}</b> ${replylist[1]}</li>'+
+						'</c:forEach>'+
+					'</ul>'+
 					'<div class="post_comment_date">1일 전</div>'+
 				'</div>'+
 			'</div>'+

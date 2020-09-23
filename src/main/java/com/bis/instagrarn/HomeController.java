@@ -48,6 +48,8 @@ public class HomeController {
 			} else {
 				list.get(i).setIsLike(false);
 			}
+			List<List<String>> replylist = profileService.select_reply(list.get(i).getBoard_idx());
+			list.get(i).setReplys(replylist);
 		}
 		
 		int user_info_idx = 0;
@@ -86,6 +88,16 @@ public class HomeController {
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
 		int user_idx = 2;
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
+		List<Integer> likelist = profileService.select_like(user_idx);
+		for(int i = 0; i<list.size(); i++) {
+			if(likelist.contains(list.get(i).getBoard_idx())) {
+				list.get(i).setIsLike(true);
+			} else {
+				list.get(i).setIsLike(false);
+			}
+			List<List<String>> replylist = profileService.select_reply(list.get(i).getBoard_idx());
+			list.get(i).setReplys(replylist);
+		}
 		return list;
 	}
 	

@@ -117,6 +117,26 @@ public class ProfileDAO {
 		return res;
 	}
 	
+	public List<List<String>> select_reply(int board_idx){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select id, reply from Insta_reply_view where board_idx = '" + board_idx + "' order by idx desc";
+
+		List<List<String>> list =jdbcTemplate.query(sql, new RowMapper<List<String>>() {
+
+			@Override
+			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+				List<String> listone = new ArrayList<String>();
+				listone.add(rs.getString("id"));
+				listone.add(rs.getString("reply"));
+				return listone;
+			}
+			
+		});
+		
+		return list;
+	}
+	
 	public int add_reply_DB(int board_idx, int user_idx, String reply){
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

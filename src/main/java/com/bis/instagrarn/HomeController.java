@@ -133,7 +133,7 @@ public class HomeController {
 					HttpSession session = request.getSession();
 					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
 					if(session_info == null) {//세션이 없을때 오류 방지  == > 가입하면 바로 로그인 될 때 세션없음 가입에 세션 추가기능 넣어주면 될 듯
-		               return Common.User.VIEW_PATH + "login.jsp";
+		               return "";
 		            }else {
 		            	user_id_info = session_info.getId();
 		            }

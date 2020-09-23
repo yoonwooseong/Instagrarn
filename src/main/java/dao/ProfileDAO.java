@@ -33,9 +33,9 @@ public class ProfileDAO {
 	}
 
 
-	public List<ProfileVO> select(int user_idx) {
+	public List<ProfileVO> select(int user_info_idx) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc";
+		String sql = "select * from Insta_board where user_idx = " + user_info_idx + " order by board_idx desc";
 		
 		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
 

@@ -33,12 +33,58 @@ public class ProfileController {
 	@Autowired
 	HttpServletRequest request;
 	
+	//프로필 페이지
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(Model model, HttpSession session) {
+		
+		Cookie[] cookies = request.getCookies();
+		int user_info_idx = 0;
+		String user_info_id = "";
+		String user_info_fullname="";
+		if(cookies == null) {
+			return Common.User.VIEW_PATH + "login.jsp";
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					
+					session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {//세션이 없을때 오류 방지  == > 가입하면 바로 로그인 될 때 세션없음 가입에 세션 추가기능 넣어주면 될 듯
+						return Common.User.VIEW_PATH + "login.jsp";
+					}else {
+						user_info_idx = session_info.getIdx();
+						user_info_id = session_info.getId();
+						user_info_fullname = session_info.getFullname();
+					}
+				}
+			}
+		}
+		
+		List<ProfileVO> list = profileService.select(user_info_idx);
+		
+		model.addAttribute("post_num", list.size());
+		model.addAttribute("list", list);
+		model.addAttribute("user_info_id", user_info_id);
+		model.addAttribute("user_info_fullname", user_info_fullname);
+		
+		return Common.Profile.VIEW_PATH + "profile.jsp";
+	}
+	
+	//프로필 편집 페이지로 전환
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	public String account_edit() {
+
+		return Common.Profile.VIEW_PATH + "edit.jsp";
+	}
+	
+	//게시글 추가 페이지로 전환 
 	@RequestMapping(value = "/addpost", method = RequestMethod.GET)
 	public String home() {
 
 		return Common.Profile.VIEW_PATH + "addpost.jsp";
 	}
 	
+	//업로드 정보 가지고 와서 기능
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String main(ProfileVO vo, HttpSession session) throws IOException {
 
@@ -95,37 +141,5 @@ public class ProfileController {
 		return "redirect:profile";
 	}
 	
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(Model model, HttpSession session) {
-		
-		Cookie[] cookies = request.getCookies();
-		int user_idx = 0;
-		String user_id = "";
-		String user_fullname="";
-		if(cookies == null) {
-			return Common.User.VIEW_PATH + "login.jsp";
-		}else {
-			for (Cookie cookie : cookies) {
-				if("rememberSession".equals(cookie.getName())) {
-
-					session = request.getSession();
-					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
-					
-					user_idx = session_info.getIdx();
-					user_id = session_info.getId();
-					user_fullname = session_info.getFullname();
-				}
-			}
-		}
-
-		List<ProfileVO> list = profileService.select(user_idx);
-		
-		model.addAttribute("post_num", list.size());
-		model.addAttribute("list", list);
-		model.addAttribute("user_id", user_id);
-		model.addAttribute("user_fullname", user_fullname);
-		
-		return Common.Profile.VIEW_PATH + "profile.jsp";
-	}
 	
 }

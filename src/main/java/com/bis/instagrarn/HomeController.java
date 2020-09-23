@@ -198,7 +198,7 @@ public class HomeController {
 		int res = userService.signup(vo);
 		
 		
-		return Common.Board.VIEW_PATH + "login.jsp";
+		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
 }

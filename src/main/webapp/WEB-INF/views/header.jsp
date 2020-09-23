@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="nav_search_div">	
-			<input class="nav_search" type="search" value="검색">
+			<input class="nav_search" type="search" placeholder="검색">
 		</div>
 		<div class="nav_menu_div">
 			<div class="nav_menu">
@@ -72,7 +72,12 @@
 		</div>
 	</nav>
 	<div id="nav_alert_news" class="nav_alert_news">
-			하이
+		<ul>
+			<li>
+				95wooseong<br>
+				님이 회원님의 게시물에 좋아요를 눌렀습니다.
+			</li>
+		</ul>
 	</div>
 	<div class="profile" id="profile" style="display:none;">
 		<div class="user_profile">

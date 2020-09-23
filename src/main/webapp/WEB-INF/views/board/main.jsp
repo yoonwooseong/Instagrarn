@@ -48,9 +48,30 @@
 			}
 		}
 	};
+	
+	function add_reply(board_idx){
+		var reply_content = document.getElementById("post_comment_add_loc").value;
+		var url = "add_reply"
+		var param = "board_idx="+board_idx+"&reply="+reply_content;
+		sendRequest(url, param, resultClickAddreply, "GET");
+	}
+	
+	function resultClickAddreply(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var data = xhr.responseText;
+			var replyUl = document.getElementById("post_comment_headers_"+data);
+			var oneReply = document.createElement('li');
+			var user_id = document.getElementById("user_id").value;
+			var record_content = document.getElementById("post_comment_add_loc").value;
+			
+			oneReply.innerHTML = "<b>"+user_id+"</b> "+record_content;
+			alert(oneReply.innerHTML);
+			replyUl.appendChild(oneReply);
+		}
+	}
 
 	function like(board_idx){
-		alert("여기");
+
 		var btn_like = document.getElementById("btn_like_"+board_idx).src;
 		var param = "board_idx=" + board_idx;
 		if(btn_like.includes('_click')){
@@ -58,7 +79,6 @@
 		} else{
 			var url = "clickLike";//+1
 		}
-		alert(url);
 		sendRequest(url, param, resultClickLike, "GET");
 	}
 	
@@ -75,7 +95,6 @@
 				addLikeNumber = Number(num)+1;
 				document.getElementById("btn_like_"+data).src = "${ pageContext.request.contextPath }/resources/images/post_button1_click.png";
 			}
-			
 			likeView.innerHTML = "좋아요 "+addLikeNumber+"개";
 		}
 	}
@@ -103,6 +122,8 @@
 
 	<jsp:include page="../header.jsp" />
 
+
+	<input id="user_id" type="hidden" value="${user_info_id}">
 	<main class="main">
 		<div class="contain">
 			<ul id="lists">
@@ -169,20 +190,17 @@
 										</div>
 									</div>
 									<div class="post_comment">
-										<div class="post_comment_more_button">
+										<!-- <div class="post_comment_more_button">
 											<a href="#">댓글 n개 모두 보기</a>
-										</div>
-										<div class="post_comment_headers">
-											<span>95wooseong</span> 첫번째 댓글이답!<br> <span>5you_bin</span>
-											두번째 댓글인데욤..<br>
-										</div>
+										</div> -->
+										<ul id="post_comment_headers_${loadlist.board_idx}"></ul>
 										<div class="post_comment_date">1일 전</div>
 									</div>
 								</div>
 								<div>
 									<div class="post_comment_add">
-										<input id="post_comment_add_loc" value="댓글 달기..."> <input
-											id="post_comment_add_btn" type="button" value="게시">
+										<input id="post_comment_add_loc" placeholder="댓글 달기...">
+										<input id="post_comment_add_btn" type="button" value="게시" onclick="add_reply(${loadlist.board_idx});">
 									</div>
 								</div>
 							</article>

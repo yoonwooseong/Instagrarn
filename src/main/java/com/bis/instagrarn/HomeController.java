@@ -39,10 +39,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
-		int user_idx = 1;
+		int user_idx = 2;
 		List<ProfileVO> list = profileService.select_post(user_idx, 0);
 		List<Integer> likelist = profileService.select_like(user_idx);
-		
 		for(int i = 0; i<list.size(); i++) {
 			if(likelist.contains(list.get(i).getBoard_idx())) {
 				list.get(i).setIsLike(true);
@@ -85,15 +84,23 @@ public class HomeController {
 	@RequestMapping(value = "/loadpost", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
-		int user_idx = 1;
+		int user_idx = 2;
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
 		return list;
+	}
+	
+	@RequestMapping(value = "/add_reply", method = RequestMethod.GET)
+	@ResponseBody
+	public int add_post(Model model, int board_idx, String reply) {
+		int user_idx = 2;
+		int res = profileService.add_reply(board_idx, user_idx, reply);
+		return board_idx;
 	}
 	
 	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
-		int user_idx = 1;
+		int user_idx = 2;
 		int res = profileService.clicked_like(board_idx, user_idx);
 		return board_idx;
 	}
@@ -101,7 +108,7 @@ public class HomeController {
 	@RequestMapping(value = "/clickUnLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickUnLike(Model model, int board_idx) {
-		int user_idx = 1;
+		int user_idx = 2;
 		int res = profileService.unclicked_like(board_idx, user_idx);
 		return board_idx;
 	}
@@ -125,8 +132,11 @@ public class HomeController {
 
 					HttpSession session = request.getSession();
 					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
-					
-					user_id_info = session_info.getId();
+					if(session_info == null) {//세션이 없을때 오류 방지  == > 가입하면 바로 로그인 될 때 세션없음 가입에 세션 추가기능 넣어주면 될 듯
+		               return Common.User.VIEW_PATH + "login.jsp";
+		            }else {
+		            	user_id_info = session_info.getId();
+		            }
 				}
 			}
 		}
@@ -191,7 +201,6 @@ public class HomeController {
 	public String signup(UserVO vo) {
 		System.out.println(vo.getFullname());
 		int res = userService.signup(vo);
-		
 		
 		return Common.User.VIEW_PATH + "login.jsp";
 	}

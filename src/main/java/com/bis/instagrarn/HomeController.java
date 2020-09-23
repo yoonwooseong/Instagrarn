@@ -49,6 +49,8 @@ public class HomeController {
 				list.get(i).setIsLike(false);
 			}
 		}
+		
+		int user_info_idx = 0;
 		String user_info_id = "";
 		String user_info_fullname = "";
 		Cookie[] cookies = request.getCookies();
@@ -65,12 +67,15 @@ public class HomeController {
 					}else {
 						user_info_id = session_info.getId();
 						user_info_fullname = session_info.getFullname();
+						user_info_idx = session_info.getIdx();
 					}
 				}
 			}
 		}
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
+		model.addAttribute("user_info_idx", user_info_idx);
+		
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
 		return Common.Board.VIEW_PATH + "main.jsp";
@@ -128,7 +133,7 @@ public class HomeController {
 					HttpSession session = request.getSession();
 					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
 					if(session_info == null) {//세션이 없을때 오류 방지  == > 가입하면 바로 로그인 될 때 세션없음 가입에 세션 추가기능 넣어주면 될 듯
-		               return Common.User.VIEW_PATH + "login.jsp";
+		               return "";
 		            }else {
 		            	user_id_info = session_info.getId();
 		            }
@@ -196,7 +201,6 @@ public class HomeController {
 	public String signup(UserVO vo) {
 		System.out.println(vo.getFullname());
 		int res = userService.signup(vo);
-		
 		
 		return Common.User.VIEW_PATH + "login.jsp";
 	}

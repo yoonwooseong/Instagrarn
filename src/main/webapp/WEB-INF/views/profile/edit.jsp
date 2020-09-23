@@ -19,7 +19,7 @@
 				if(j!=i){
 					edit += j;
 					sub +=j+"_sub";			
-					document.getElementById(edit).style='border-left: 2px solid transparent; font-weight: 100';
+					document.getElementById(edit).style='border-left: 2px solid transparent; font-weight: 400';
 					document.getElementById(sub).style.display="none";
 				}else{
 					edit += j;

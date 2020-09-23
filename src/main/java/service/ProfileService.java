@@ -18,8 +18,8 @@ public class ProfileService {
 		return res;
 	}
 
-	public List<ProfileVO> select(int user_info_idx) { 
-		List<ProfileVO> list = profile_dao.select(user_info_idx);
+	public List<ProfileVO> select(int user_idx) { 
+		List<ProfileVO> list = profile_dao.select(user_idx);
 		return list;
 	}
 	
@@ -50,6 +50,7 @@ public class ProfileService {
 		int res2 = profile_dao.clicked_unlike_DB(board_idx, user_idx);
 		return res;
 	}
+
 
 	
 

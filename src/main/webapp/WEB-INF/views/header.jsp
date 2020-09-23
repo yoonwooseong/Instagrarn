@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="nav_search_div">	
-			<input class="nav_search" type="search" value="검색">
+			<input class="nav_search" type="search" placeholder="검색">
 		</div>
 		<div class="nav_menu_div">
 			<div class="nav_menu">

@@ -33,6 +33,11 @@ public class ProfileService {
 		return list;
 	}
 	
+	public int add_reply(int board_idx, int user_idx, String reply) {
+		int res = profile_dao.add_reply_DB(board_idx, user_idx, reply);
+		return res;
+	}
+	
 	public int clicked_like(int board_idx, int user_idx) {
 		int res = profile_dao.clicked_like(board_idx);
 		int res2 = profile_dao.clicked_like_DB(board_idx, user_idx);

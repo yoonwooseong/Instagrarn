@@ -57,8 +57,8 @@ public class ProfileDAO {
 
 	public List<ProfileVO> select_post(int user_idx, int page) {
 		int set_page = page * 3;
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + set_page + ", 3";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//where user_idx = " + user_idx + "
+		String sql = "select * from Insta_board order by board_idx desc limit " + set_page + ", 3";
 		
 		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
 
@@ -115,6 +115,15 @@ public class ProfileDAO {
 				+ "VALUES (0, ?, ?)", user_idx, board_idx);
 		
 		return res;
+	}
+	
+	public int add_reply_DB(int board_idx, int user_idx, String reply){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update("insert into Insta_reply (idx, board_idx, user_idx, reply) "
+				+ "VALUES (0, ?, ?, ?)", user_idx, board_idx, reply);
+		
+		return board_idx;
 	}
 	
 	public int unclicked_like(int board_idx) {

@@ -38,8 +38,16 @@
 		</div>
 		<div class="profile_text_box">
 			<div class="profile_first">
-				<div class="user_info_id">${user_id}</div>
-
+				<div class="user_info_id">${user_info_id}</div>
+				<div class="profile_edit">
+					<div class="profile_edit_box" onclick="location.href='/instagrarn/account'">
+						<div class="profile_edit_text">프로필 편집</div>
+					</div>
+				</div>
+				<div class="setting">
+				<img src="${ pageContext.request.contextPath }/resources/images/setting.png" alt="setting_icon"
+					style="width:33px; height:33px; padding-left:8px;">
+				</div>
 			</div>
 			<div class="profile_middle">
 				<div class="post">
@@ -52,7 +60,7 @@
 					<span class="profile_middle_text">팔로워<span class="following_num"> 12</span></span>						
 				</div>
 			</div>
-			<div class="profile_last">${user_full_name}</div>
+			<div class="profile_last">${user_info_fullname}</div>
 		</div>
 	</div>
 		
@@ -72,12 +80,16 @@
 				</div>
 			</div>
 		</div>
-
+		<c:if test="${fn:length(list) != 0}">
+			<div class="group3" id="group3" onclick="location.href='/instagrarn/addpost'">
+			<img src="${ pageContext.request.contextPath }/resources/images/addpost.png" width="12"> 게시글 추가</div>
+		</c:if>
 	</div>
 	<c:if test="${fn:length(list) == 0}">
 		<div class="user_post1" id="user_post">
 			<img class="user_post_img" src="${ pageContext.request.contextPath }/resources/images/camera.png" width="62">
-			<div class="user_post_text">게시글이 없습니다.</div>
+			<div class="user_post_text">사진 업로드</div>
+			<input class="user_post_btn" type="button" value="업로드" onclick="location.href='/instagrarn/addpost'">
 		</div>
 	</c:if>
 		

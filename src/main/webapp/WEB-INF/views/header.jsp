@@ -76,7 +76,7 @@
 	</div>
 	<div class="profile" id="profile" style="display:none;">
 		<div class="user_profile">
-		<a href="/instagrarn/profile" style="color:black;">프로필</a>
+		<a href="/instagrarn/profile?user_idx=${user_info_idx}" style="color:black;">프로필</a>
 		</div>
 		<hr>
 		<div class="/instagrarn/logout">

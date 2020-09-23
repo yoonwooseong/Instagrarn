@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.Common;
 import service.ProfileService;
+import service.UserService;
 import vo.ProfileVO;
 import vo.UserVO;
 
@@ -31,16 +32,20 @@ public class ProfileController {
 	ProfileService profileService;
 	
 	@Autowired
+	UserService userService;
+	
+	@Autowired
 	HttpServletRequest request;
 	
 	//프로필 페이지
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(Model model, HttpSession session) {
+	public String profile(int user_idx, Model model, HttpSession session) {
 		
 		Cookie[] cookies = request.getCookies();
 		int user_info_idx = 0;
 		String user_info_id = "";
 		String user_info_fullname="";
+		
 		if(cookies == null) {
 			return Common.User.VIEW_PATH + "login.jsp";
 		}else {
@@ -60,26 +65,75 @@ public class ProfileController {
 			}
 		}
 		
-		List<ProfileVO> list = profileService.select(user_info_idx);
-		
-		model.addAttribute("post_num", list.size());
-		model.addAttribute("list", list);
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
+		model.addAttribute("user_info_idx", user_info_idx);
 		
-		return Common.Profile.VIEW_PATH + "profile.jsp";
+		System.out.println("user_idx : " + user_idx + "user_info_idx : " + user_info_idx);
+		if(user_idx == user_info_idx) {
+			List<ProfileVO> list = profileService.select(user_info_idx);
+			
+			model.addAttribute("post_num", list.size());
+			model.addAttribute("list", list);
+			
+			return Common.Profile.VIEW_PATH + "my_profile.jsp";
+		}else {
+				List<ProfileVO> list_profile = profileService.select(user_idx);
+				UserVO uservo = userService.select(user_idx);
+		
+				model.addAttribute("post_num", list_profile.size());
+				model.addAttribute("list", list_profile);
+				model.addAttribute("user_id", uservo.getId());
+				model.addAttribute("user_full_name", uservo.getFullname());
+				
+			return Common.Profile.VIEW_PATH + "profile.jsp";
+		}
 	}
 	
 	//프로필 편집 페이지로 전환
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
-	public String account_edit() {
+	public String account_edit(HttpSession session, Model model) {
+		Cookie[] cookies = request.getCookies();
+		int user_info_idx = 0;
+		
+		if(cookies == null) {
+			return Common.User.VIEW_PATH + "login.jsp";
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
 
+					session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					
+					user_info_idx = session_info.getIdx();
+				}
+			}
+		}
+		model.addAttribute("user_info_idx", user_info_idx);
+		
 		return Common.Profile.VIEW_PATH + "edit.jsp";
 	}
 	
 	//게시글 추가 페이지로 전환 
 	@RequestMapping(value = "/addpost", method = RequestMethod.GET)
-	public String home() {
+	public String home(HttpSession session, Model model) {
+		Cookie[] cookies = request.getCookies();
+		int user_info_idx = 0;
+		
+		if(cookies == null) {
+			return Common.User.VIEW_PATH + "login.jsp";
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+
+					session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					
+					user_info_idx = session_info.getIdx();
+				}
+			}
+		}
+		model.addAttribute("user_info_idx", user_info_idx);
 
 		return Common.Profile.VIEW_PATH + "addpost.jsp";
 	}
@@ -89,7 +143,7 @@ public class ProfileController {
 	public String main(ProfileVO vo, HttpSession session) throws IOException {
 
 		Cookie[] cookies = request.getCookies();
-		int user_idx = 0;
+		int user_info_idx = 0;
 
 		if(cookies == null) {
 			return Common.User.VIEW_PATH + "login.jsp";
@@ -100,8 +154,8 @@ public class ProfileController {
 					session = request.getSession();
 					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
 					
-					user_idx = session_info.getIdx();
-					vo.setUser_idx(user_idx);
+					user_info_idx = session_info.getIdx();
+					vo.setUser_idx(user_info_idx);
 				}
 			}
 		}
@@ -138,7 +192,7 @@ public class ProfileController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:profile";
+		return "redirect:profile?user_idx="+user_info_idx;
 	}
 	
 	

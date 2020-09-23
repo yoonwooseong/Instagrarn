@@ -51,6 +51,7 @@ public class HomeController {
 			}
 		}
 		
+		int user_info_idx = 0;
 		String user_info_id = "";
 		String user_info_fullname = "";
 		Cookie[] cookies = request.getCookies();
@@ -67,12 +68,14 @@ public class HomeController {
 					}else {
 						user_info_id = session_info.getId();
 						user_info_fullname = session_info.getFullname();
+						user_info_idx = session_info.getIdx();
 					}
 				}
 			}
 		}
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
+		model.addAttribute("user_info_idx", user_info_idx);
 		
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
@@ -190,7 +193,7 @@ public class HomeController {
 		int res = userService.signup(vo);
 		
 		
-		return Common.Board.VIEW_PATH + "main.jsp";
+		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
 }

@@ -33,9 +33,9 @@ public class ProfileDAO {
 	}
 
 
-	public List<ProfileVO> select(int user_info_idx) {
+	public List<ProfileVO> select(int user_idx) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select * from Insta_board where user_idx = " + user_info_idx + " order by board_idx desc";
+		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc";
 		
 		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
 
@@ -58,7 +58,7 @@ public class ProfileDAO {
 	public List<ProfileVO> select_post(int user_idx, int page) {
 		int set_page = page * 3;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select * from Insta_board where user_idx = " + user_idx + " order by board_idx desc limit " + set_page + ", 3";
+		String sql = "select * from Insta_board order by board_idx desc limit " + set_page + ", 3";
 		
 		List<ProfileVO> list =jdbcTemplate.query(sql, new RowMapper<ProfileVO>() {
 

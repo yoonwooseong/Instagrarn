@@ -112,7 +112,7 @@
 							<article class="article2">
 								<header class="header_title">
 									<div class="post_icon">
-										<a href="#"> <img
+										<a href="/instagrarn/profile?user_idx=1"> <img
 											src="${ pageContext.request.contextPath }/resources/images/IconME.png"
 											alt="myInfo">
 										</a>

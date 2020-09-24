@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/main.css">
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/httpRequest.js"></script>
-<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/initscroll.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/initscroll.js?ver=1"></script>
 <script type="text/javascript">
 
 	var num = 1;
@@ -39,8 +39,12 @@
 						var content = json[i].content;
 						var area = json[i].area;
 						var like_num = json[i].like_num;
+						console.log(data);
+						var replylist = json[i].replys;
+						var data = {'img':img, 'content':content, 'like_num':like_num, 'board_idx':board_idx, 'replylist':replylist};
+						console.log(data.replylist[0]);
 						var one = document.createElement('li');
-						var ones = addscroll(img, content, like_num);
+						var ones = addscroll(data);
 						one.innerHTML = ones;
 						lists.appendChild(one);
 					}
@@ -49,6 +53,7 @@
 		}
 	};
 	
+	//댓글 달기 Ajax
 	function add_reply(board_idx){
 		var reply_content = document.getElementById("post_comment_add_loc").value;
 		var url = "add_reply"
@@ -65,11 +70,11 @@
 			var record_content = document.getElementById("post_comment_add_loc").value;
 			
 			oneReply.innerHTML = "<b>"+user_id+"</b> "+record_content;
-			alert(oneReply.innerHTML);
 			replyUl.appendChild(oneReply);
 		}
 	}
 
+	//좋아요 버튼 Ajax
 	function like(board_idx){
 
 		var btn_like = document.getElementById("btn_like_"+board_idx).src;
@@ -169,9 +174,8 @@
 										</div>
 	
 										<div class="post_button_right">
-											<a href="#"> <img
-												src="${ pageContext.request.contextPath }/resources/images/post_button4.png"
-												alt="bookmark">
+											<a href="#">
+												<img src="${ pageContext.request.contextPath }/resources/images/post_button4.png" alt="bookmark">
 											</a>
 										</div>
 	
@@ -185,15 +189,19 @@
 										<div class="post_content_header">
 											<span>wooseong2</span> ${loadlist.content}
 										</div>
-										<div class="post_content_more_button">
+										<!-- <div class="post_content_more_button">
 											<a href="#">더보기</a>
-										</div>
+										</div> -->
 									</div>
 									<div class="post_comment">
 										<!-- <div class="post_comment_more_button">
 											<a href="#">댓글 n개 모두 보기</a>
 										</div> -->
-										<ul id="post_comment_headers_${loadlist.board_idx}"></ul>
+										<ul id="post_comment_headers_${loadlist.board_idx}">
+											<c:forEach var="replylist" items="${loadlist.replys}">
+												<li><b>${replylist[0]}</b> ${replylist[1]}</li>
+											</c:forEach>
+										</ul>
 										<div class="post_comment_date">1일 전</div>
 									</div>
 								</div>

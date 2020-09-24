@@ -43,6 +43,11 @@ public class ProfileService {
 		return res2;
 	}
 	
+	public int add_alert(int from_user_idx, int to_user_idx, String alert_type) {
+		int res2 = profile_dao.add_alert_DB(from_user_idx, to_user_idx, alert_type);
+		return res2;
+	}
+	
 	public int clicked_like(int board_idx, int user_idx) {
 		int res = profile_dao.clicked_like(board_idx);
 		int res2 = profile_dao.clicked_like_DB(board_idx, user_idx);

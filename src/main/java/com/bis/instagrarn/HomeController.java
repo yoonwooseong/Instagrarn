@@ -105,7 +105,11 @@ public class HomeController {
 	@ResponseBody
 	public int add_post(Model model, int board_idx, String reply) {
 		int user_idx = 2;
+		int from_user_idx = 2;
+		int to_user_idx = 1;
+		String alert_type = "reply";
 		int res = profileService.add_reply(board_idx, user_idx, reply);
+		profileService.add_alert(from_user_idx, to_user_idx, alert_type);
 		return board_idx;
 	}
 	

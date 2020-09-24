@@ -146,6 +146,15 @@ public class ProfileDAO {
 		return board_idx;
 	}
 	
+	public int add_alert_DB(int from_user_idx, int to_user_idx, String alert_type){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update("insert into Insta_alert (idx, from_user_idx, to_user_idx, alert_type) "
+				+ "VALUES (0, ?, ?, ?)", from_user_idx, to_user_idx, alert_type);
+		
+		return from_user_idx;
+	}
+	
 	public int unclicked_like(int board_idx) {
 		String sql = "update Insta_board set like_num = like_num - 1 where board_idx=" + board_idx;
 		

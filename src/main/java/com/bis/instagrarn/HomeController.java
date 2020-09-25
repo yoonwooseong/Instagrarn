@@ -101,6 +101,14 @@ public class HomeController {
 		return list;
 	}
 	
+	@RequestMapping(value = "/loadalert", method = RequestMethod.GET)
+	@ResponseBody
+	public List<List<String>> loadalert(Model model, int user_idx) {
+
+		List<List<String>> loadAlertList = profileService.loadalert(user_idx);
+		return loadAlertList;
+	}
+	
 	@RequestMapping(value = "/add_reply", method = RequestMethod.GET)
 	@ResponseBody
 	public int add_reply(Model model, int board_idx, String reply) {

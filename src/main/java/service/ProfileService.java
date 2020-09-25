@@ -33,6 +33,11 @@ public class ProfileService {
 		return list;
 	}
 	
+	public List<List<String>> loadalert(int user_idx) {
+		List<List<String>> res = profile_dao.loadalert(user_idx);
+		return res;
+	}
+	
 	public List<List<String>> select_reply(int board_idx) {
 		List<List<String>> res = profile_dao.select_reply(board_idx);
 		return res;

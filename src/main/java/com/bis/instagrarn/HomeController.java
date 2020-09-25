@@ -101,14 +101,22 @@ public class HomeController {
 		return list;
 	}
 	
+	@RequestMapping(value = "/loadalert", method = RequestMethod.GET)
+	@ResponseBody
+	public List<List<String>> loadalert(Model model, int user_idx) {
+
+		List<List<String>> loadAlertList = profileService.loadalert(user_idx);
+		return loadAlertList;
+	}
+	
 	@RequestMapping(value = "/add_reply", method = RequestMethod.GET)
 	@ResponseBody
-	public int add_post(Model model, int board_idx, String reply) {
+	public int add_reply(Model model, int board_idx, String reply) {
 		int user_idx = 2;
-		int from_user_idx = 2;
+		int from_user_idx = user_idx;
 		int to_user_idx = 1;
 		String alert_type = "reply";
-		int res = profileService.add_reply(board_idx, user_idx, reply);
+		profileService.add_reply(board_idx, user_idx, reply);
 		profileService.add_alert(from_user_idx, to_user_idx, alert_type);
 		return board_idx;
 	}
@@ -117,7 +125,11 @@ public class HomeController {
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
 		int user_idx = 2;
-		int res = profileService.clicked_like(board_idx, user_idx);
+		int from_user_idx = user_idx;
+		int to_user_idx = 1;
+		String alert_type = "like";
+		profileService.clicked_like(board_idx, user_idx);
+		profileService.add_alert(from_user_idx, to_user_idx, alert_type);
 		return board_idx;
 	}
 	

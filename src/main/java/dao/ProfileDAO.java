@@ -141,7 +141,7 @@ public class ProfileDAO {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update("insert into Insta_reply (idx, board_idx, user_idx, reply) "
-				+ "VALUES (0, ?, ?, ?)", user_idx, board_idx, reply);
+				+ "VALUES (0, ?, ?, ?)", board_idx, user_idx, reply);
 		
 		return board_idx;
 	}

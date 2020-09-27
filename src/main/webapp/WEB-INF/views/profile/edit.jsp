@@ -54,7 +54,7 @@
 				<div class="group1_img"><img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="myInfo" width="38"></div>
 				<div class="group1_text_box">
 				<div class="group1_text1">u_zin19</div>
-				<div class="group1_text2">프로필 사진 바꾸기</div>
+				<button class="group1_text2">프로필 사진 바꾸기</button>
 				</div>
 			</div>
 		</article><article class="sub" id="edit2_sub"></article>

@@ -128,17 +128,17 @@
 		<div class="contain">
 			<ul id="lists">
 				<li class="one_post">
-					<c:forEach var="loadlist" items="${loadlist}">
+					<c:forEach var="loadlist" items="${loadlist}"><c:forEach var="userlist" items="${userlist}">
 						<div class="article">
 							<article class="article2">
 								<header class="header_title">
 									<div class="post_icon">
-										<a href="/instagrarn/profile?user_idx=1"> <img
+										<a href="/instagrarn/profile?user_idx=${userlist.idx }"> <img
 											src="${ pageContext.request.contextPath }/resources/images/IconME.png"
 											alt="myInfo">
 										</a>
 									</div>
-									<div class="post_name">wooseong2</div>
+									<div class="post_name">${userlist.id }</div>
 									<div class="post_sub_action">...</div>
 								</header>
 								<div class="post_img">
@@ -183,7 +183,7 @@
 								<div>
 									<div class="post_content">
 										<div class="post_content_header">
-											<span>wooseong2</span> ${loadlist.content}
+											<span>${userlist.id }</span> ${loadlist.content}
 										</div>
 										<div class="post_content_more_button">
 											<a href="#">더보기</a>
@@ -205,7 +205,7 @@
 								</div>
 							</article>
 						</div>
-					</c:forEach>
+					</c:forEach></c:forEach>
 					<div class="sub_menu">
 						<div class="user_info">
 							<div class="user_info_profile_img">

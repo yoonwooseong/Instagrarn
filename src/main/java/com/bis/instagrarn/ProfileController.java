@@ -79,7 +79,7 @@ public class ProfileController {
 			return Common.Profile.VIEW_PATH + "my_profile.jsp";
 		}else {
 				List<ProfileVO> list_profile = profileService.select(user_idx);
-				UserVO uservo = userService.select(user_idx);
+				UserVO uservo = userService.select_id(user_idx);
 		
 				model.addAttribute("post_num", list_profile.size());
 				model.addAttribute("list", list_profile);

@@ -117,13 +117,58 @@ public class ProfileDAO {
 		return res;
 	}
 	
+	public List<List<String>> loadalert(int user_idx){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select from_user_idx, alert_type from Insta_alert where to_user_idx = '" + user_idx + "' order by idx desc";
+
+		List<List<String>> list = jdbcTemplate.query(sql, new RowMapper<List<String>>() {
+
+			@Override
+			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+				List<String> listone = new ArrayList<String>();
+				listone.add(Integer.toString(rs.getInt("from_user_idx")));
+				listone.add(rs.getString("alert_type"));
+				return listone;
+			}
+		});
+		return list;
+	}
+	
+	public List<List<String>> select_reply(int board_idx){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select id, reply from Insta_reply_view where board_idx = '" + board_idx + "' order by idx desc";
+
+		List<List<String>> list =jdbcTemplate.query(sql, new RowMapper<List<String>>() {
+
+			@Override
+			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+				List<String> listone = new ArrayList<String>();
+				listone.add(rs.getString("id"));
+				listone.add(rs.getString("reply"));
+				return listone;
+			}
+		});
+		return list;
+	}
+	
 	public int add_reply_DB(int board_idx, int user_idx, String reply){
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update("insert into Insta_reply (idx, board_idx, user_idx, reply) "
-				+ "VALUES (0, ?, ?, ?)", user_idx, board_idx, reply);
+				+ "VALUES (0, ?, ?, ?)", board_idx, user_idx, reply);
 		
 		return board_idx;
+	}
+	
+	public int add_alert_DB(int from_user_idx, int to_user_idx, String alert_type){
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update("insert into Insta_alert (idx, from_user_idx, to_user_idx, alert_type) "
+				+ "VALUES (0, ?, ?, ?)", from_user_idx, to_user_idx, alert_type);
+		
+		return from_user_idx;
 	}
 	
 	public int unclicked_like(int board_idx) {

@@ -33,9 +33,24 @@ public class ProfileService {
 		return list;
 	}
 	
-	public int add_reply(int board_idx, int user_idx, String reply) {
-		int res = profile_dao.add_reply_DB(board_idx, user_idx, reply);
+	public List<List<String>> loadalert(int user_idx) {
+		List<List<String>> res = profile_dao.loadalert(user_idx);
 		return res;
+	}
+	
+	public List<List<String>> select_reply(int board_idx) {
+		List<List<String>> res = profile_dao.select_reply(board_idx);
+		return res;
+	}
+	
+	public int add_reply(int board_idx, int user_idx, String reply) {
+		int res2 = profile_dao.add_reply_DB(board_idx, user_idx, reply);
+		return res2;
+	}
+	
+	public int add_alert(int from_user_idx, int to_user_idx, String alert_type) {
+		int res2 = profile_dao.add_alert_DB(from_user_idx, to_user_idx, alert_type);
+		return res2;
 	}
 	
 	public int clicked_like(int board_idx, int user_idx) {

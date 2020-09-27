@@ -120,14 +120,15 @@ public class ProfileDAO {
 	public List<List<String>> loadalert(int user_idx){
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select from_user_idx, alert_type from Insta_alert where to_user_idx = '" + user_idx + "' order by idx desc";
+		String sql = "select id, alert_type from Insta_alert_view where to_user_idx = '" + user_idx + "'";
 
 		List<List<String>> list = jdbcTemplate.query(sql, new RowMapper<List<String>>() {
 
 			@Override
 			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
 				List<String> listone = new ArrayList<String>();
-				listone.add(Integer.toString(rs.getInt("from_user_idx")));
+				listone.add(rs.getString("id"));
+				//listone.add(Integer.toString(rs.getInt("from_user_idx")));
 				listone.add(rs.getString("alert_type"));
 				return listone;
 			}

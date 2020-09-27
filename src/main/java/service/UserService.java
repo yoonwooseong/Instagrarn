@@ -23,7 +23,7 @@ public class UserService {
 		return login_vo;
 	}
 
-	public UserVO select(int user_idx) {
+	public UserVO select_id(int user_idx) {
 		UserVO uservo = user_dao.select(user_idx);
 		return uservo;
 	}

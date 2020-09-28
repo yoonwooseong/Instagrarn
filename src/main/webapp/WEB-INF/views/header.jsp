@@ -43,10 +43,11 @@
 				var from_use_id = json[i][0];
 				var type_alert = json[i][1];
 				var one = document.createElement('li');
+				one.id = 'alert_view_'+i;
 				if(type_alert=="like"){
-					one.innerHTML = "<b>"+from_use_id+"</b><br>님이 회원님의 게시물에 좋아요를 눌렀습니다.";
+					one.innerHTML = '<img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="profile"><b>'+from_use_id+'</b><br>님이 회원님의 게시물에 좋아요를 눌렀습니다.';
 				} else {
-					one.innerHTML = "<b>"+from_use_id+"</b><br>님이 회원님의 게시물에 댓글을 남겼습니다.";
+					one.innerHTML = '<img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="profile"><b>'+from_use_id+'</b><br>님이 회원님의 게시물에 댓글을 남겼습니다.';
 				}
 				nav_alert_ul.appendChild(one);
 			}

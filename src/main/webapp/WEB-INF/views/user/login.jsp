@@ -20,7 +20,7 @@
 				var data = xhr.responseText;
 			
 				if(data == ""){
-					alert("로그인 정보 없음");
+
 				}else{
 					document.f.style.display = 'none';
 					document.f2.style.display = 'block';

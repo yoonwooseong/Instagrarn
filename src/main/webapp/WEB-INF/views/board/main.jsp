@@ -233,40 +233,23 @@
 								표시됩니다.</div>
 						</div>
 
-						<div class="friend_recommend">
-							<div>
-								<div>
-									회원님을 위한 추천 <a href="#">모두 보기</a>
-								</div>
+						<ul class="friend_recommend">
+							<div class="friend_recommend_title">
+								회원님을 위한 추천 <a class="more_view_recommend" href="#">모두 보기</a>
 							</div>
-
-							<div>
-								<div>
-									아이디<br> 회원님을 팔로우 합니다
-								</div>
-								<a href="#">팔로우</a>
-							</div>
-
-							<div>
-								<div>
-									아이디<br> 회원님을 팔로우 합니다
-								</div>
-								<a href="#">팔로우</a>
-							</div>
-
-							<div>
-								<div>
-									아이디<br> 회원님을 팔로우 합니다
-								</div>
-								<a href="#">팔로우</a>
-							</div>
-
-						</div>
+							
+							<c:forEach var="ones" items="${recommendlist}">
+								<li>
+									<span class="recommend_id">${ones.id}</span><br> 회원님을 팔로우 합니다
+									<a class="recommend_follow" href="#">팔로우</a>
+								</li>
+							</c:forEach>
+						</ul>
 
 						<div class="etc">홈페이지 소개, 도움말, API, 개인정보처리방침, 약관, 위치, 해시태그,
 							언어</div>
 
-						<div class="end">저작권그거</div>
+						<div class="end">© 2020 INSTAGRAM FROM FACEBOOK</div>
 
 					</div>
 				</li>

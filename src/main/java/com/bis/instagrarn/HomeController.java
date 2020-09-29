@@ -1,5 +1,6 @@
 package com.bis.instagrarn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -33,7 +34,7 @@ public class HomeController {
 	
 	@Autowired
 	ProfileService profileService;
-	
+
 	@Autowired
 	HttpServletRequest request;
 	
@@ -43,7 +44,13 @@ public class HomeController {
 		List<ProfileVO> list = profileService.select_post(user_idx, 0);
 		List<Integer> likelist = profileService.select_like(user_idx);
 		List<UserVO> recommend_list = profileService.select_recommend(user_idx);
-		for(int i = 0; i<list.size(); i++) {
+		//for(int i = 0; i<list.size(); i++) {
+		//List<UserVO> userlist = new ArrayList<UserVO>();
+
+		for(int i = 0; i<list.size(); i++) {	
+			UserVO uservo = userService.select_id(list.get(i).getUser_idx());
+			userlist.add(uservo);
+
 			if(likelist.contains(list.get(i).getBoard_idx())) {
 				list.get(i).setIsLike(true);
 			} else {
@@ -75,6 +82,7 @@ public class HomeController {
 				}
 			}
 		}
+
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
 		model.addAttribute("user_info_idx", user_info_idx);
@@ -82,6 +90,7 @@ public class HomeController {
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
 		model.addAttribute("recommendlist", recommend_list);
+		model.addAttribute("userlist", userlist);
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}
 	

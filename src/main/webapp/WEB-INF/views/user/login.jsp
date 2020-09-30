@@ -47,6 +47,15 @@
 					<input name="phone" class="text" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="전화번호, 사용자 이름 또는 이메일">
 					<input type="password" name="pwd" class="text" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
 					<input class="signin_btn" type="button" style="width:270px;height:30px; background-color: #B2DFFC;" value="로그인" onclick="send();">
+					<div class="login_part_box">
+						<div class="login_part_line"></div>
+						<div class="login_part_or">또는</div>
+						<div class="login_part_line"></div>
+					</div>
+					<div class="facebook_login_title">
+						Facebook으로 로그인
+					</div>
+					<a class="lose_pw" href="#">비밀번호를 잊으셨나요?</a>
 				</form>
 				<form name="f2" style="display:none;">
 					<div class="user_img_div"><img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="Home" height="100" class="user_img"></div>

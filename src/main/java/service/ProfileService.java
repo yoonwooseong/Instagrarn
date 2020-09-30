@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dao.ProfileDAO;
 import vo.ProfileVO;
+import vo.UserVO;
 
 @Service("profileService")
 public class ProfileService {
@@ -25,6 +26,10 @@ public class ProfileService {
 	
 	public List<ProfileVO> select_post(int user_idx, int page) {
 		List<ProfileVO> list = profile_dao.select_post(user_idx, page);
+		return list;
+	}
+	public List<UserVO> select_recommend(int user_idx) {
+		List<UserVO> list = profile_dao.select_recommend(user_idx);
 		return list;
 	}
 	

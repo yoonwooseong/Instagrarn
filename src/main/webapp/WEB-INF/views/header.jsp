@@ -37,10 +37,20 @@
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var nav_alert_ul = document.getElementById("nav_alert_ul");
 			var data = xhr.responseText;
-			alert(data);
-			var one = document.createElement('li');
-			one.innerHTML = "님이 회원님의 게시물에 좋아요를 눌렀습니다.";
-			nav_alert_ul.appendChild(one);
+			var json = eval(data);
+
+			for (var i = 0; i < json.length; i++) {
+				var from_use_id = json[i][0];
+				var type_alert = json[i][1];
+				var one = document.createElement('li');
+				one.id = 'alert_view_'+i;
+				if(type_alert=="like"){
+					one.innerHTML = '<img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="profile"><b>'+from_use_id+'</b><br>님이 회원님의 게시물에 좋아요를 눌렀습니다.';
+				} else {
+					one.innerHTML = '<img src="${ pageContext.request.contextPath }/resources/images/IconME.png" alt="profile"><b>'+from_use_id+'</b><br>님이 회원님의 게시물에 댓글을 남겼습니다.';
+				}
+				nav_alert_ul.appendChild(one);
+			}
 		}
 	}
 	
@@ -95,10 +105,6 @@
 	</nav>
 	<div id="nav_alert_news" class="nav_alert_news">
 		<ul id="nav_alert_ul">
-			<li>
-				95wooseong<br>
-				님이 회원님의 게시물에 좋아요를 눌렀습니다.
-			</li>
 		</ul>
 	</div>
 	<div class="profile" id="profile" style="display:none;">

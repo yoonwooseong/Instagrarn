@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import vo.ProfileVO;
+import vo.UserVO;
 
 public class ProfileDAO {
 	
@@ -98,6 +99,27 @@ public class ProfileDAO {
 		return list;
 	}
 	
+	public List<UserVO> select_recommend(int user_idx) {
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//where user_idx = " + user_idx + "
+		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " order by idx desc";
+		
+		List<UserVO> list =jdbcTemplate.query(sql, new RowMapper<UserVO>() {
+
+			@Override
+			public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UserVO list = new UserVO(
+						rs.getInt("idx"),
+						rs.getString("full_name"),
+						rs.getString("id"));
+				
+				return list;
+			}
+			
+		});
+		return list;
+	}
+	
 	public int clicked_like(int board_idx) {
 		String sql = "update Insta_board set like_num = like_num + 1 where board_idx=" + board_idx;
 		
@@ -120,14 +142,15 @@ public class ProfileDAO {
 	public List<List<String>> loadalert(int user_idx){
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select from_user_idx, alert_type from Insta_alert where to_user_idx = '" + user_idx + "' order by idx desc";
+		String sql = "select id, alert_type from Insta_alert_view where to_user_idx = '" + user_idx + "'";
 
 		List<List<String>> list = jdbcTemplate.query(sql, new RowMapper<List<String>>() {
 
 			@Override
 			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
 				List<String> listone = new ArrayList<String>();
-				listone.add(Integer.toString(rs.getInt("from_user_idx")));
+				listone.add(rs.getString("id"));
+				//listone.add(Integer.toString(rs.getInt("from_user_idx")));
 				listone.add(rs.getString("alert_type"));
 				return listone;
 			}

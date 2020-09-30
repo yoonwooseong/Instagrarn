@@ -48,6 +48,7 @@ public class HomeController {
 		//List<UserVO> userlist = new ArrayList<UserVO>();
 
 		for(int i = 0; i<list.size(); i++) {	
+			List<UserVO> userlist = new ArrayList<UserVO>();
 			UserVO uservo = userService.select_id(list.get(i).getUser_idx());
 			userlist.add(uservo);
 
@@ -86,11 +87,11 @@ public class HomeController {
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
 		model.addAttribute("user_info_idx", user_info_idx);
-		
+		System.out.println(list.get(0).getBoard_idx());
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
 		model.addAttribute("recommendlist", recommend_list);
-		model.addAttribute("userlist", userlist);
+
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}
 	

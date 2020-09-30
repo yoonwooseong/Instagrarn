@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import vo.ProfileVO;
+import vo.UserVO;
 
 public class ProfileDAO {
 	
@@ -95,6 +96,27 @@ public class ProfileDAO {
 			
 		});
 		
+		return list;
+	}
+	
+	public List<UserVO> select_recommend(int user_idx) {
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//where user_idx = " + user_idx + "
+		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " order by idx desc";
+		
+		List<UserVO> list =jdbcTemplate.query(sql, new RowMapper<UserVO>() {
+
+			@Override
+			public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UserVO list = new UserVO(
+						rs.getInt("idx"),
+						rs.getString("full_name"),
+						rs.getString("id"));
+				
+				return list;
+			}
+			
+		});
 		return list;
 	}
 	

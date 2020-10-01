@@ -44,8 +44,17 @@ body{
 	text-align: center;
 	position: relative;
 	float:right;
-	
 }
+.user_container3{
+	color: rgba(var(--i1d,38,38,38),1);
+    font-size: 14px;
+    text-align: center;
+	position: relative;
+	float:right;
+	padding-top:20px;
+	padding-right: 110px;
+}
+
 .text{
 	
 	border-style:solid;
@@ -61,14 +70,6 @@ body{
 	border-radius:3px;
 	color:#ffffff;
 	font-weight:bolder;
-	
-}
-.user_container3{
-	text-align: center;
-	position: relative;
-	float:right;
-	padding-top:20px;
-	padding-right: 95px;
 	
 }
 .login_container img{

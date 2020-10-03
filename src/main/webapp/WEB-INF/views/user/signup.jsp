@@ -15,6 +15,23 @@
 		}
 	</script>
 	
+	<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script>
+		$(function() {
+		    $("#test").on("keyup", function() {
+		        var flag = true;
+		        flag = $(this).val().length > 0 ? false : true;
+		        $("#btn-submit").attr("disabled", flag);
+		        if (flag == true){
+		        	document.getElementById("btn-submit").style.backgroundColor = '#B2DFFC';
+		        } else {
+		        	document.getElementById("btn-submit").style.backgroundColor = '#0095f6';
+		        }
+		        	
+		    });
+		});
+	</script>
+	
 </head>
 <body>
 	<div class="container">
@@ -34,8 +51,8 @@
 					<input class="text" name="phone" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="휴대폰 번호 또는 이메일 주소">
 					<input class="text" name="fullname" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="성명">
 					<input class="text" name="id" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="사용자 이름">
-					<input class="text" name="pwd" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
-					<input class="signin_btn" type="button" style="width:270px;height:30px; background-color: #B2DFFC;" value="가입" onclick="send();">
+					<input class="text" id="test" name="pwd" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
+					<input class="signin_btn" id="btn-submit" type="button" disabled style="width:270px;height:30px; background-color: #B2DFFC;" value="가입" onclick="send();">
 				</form>
 				<div class="info_warn">가입하면 Instagram의 약관, 데이터 정책 및 쿠키 정책에 동의하게 됩니다.</div>
 			</div>

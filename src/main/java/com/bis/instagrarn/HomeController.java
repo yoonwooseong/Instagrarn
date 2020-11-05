@@ -44,8 +44,6 @@ public class HomeController {
 		List<ProfileVO> list = profileService.select_post(user_idx, 0);
 		List<Integer> likelist = profileService.select_like(user_idx);
 		List<UserVO> recommend_list = profileService.select_recommend(user_idx);
-		//for(int i = 0; i<list.size(); i++) {
-		//List<UserVO> userlist = new ArrayList<UserVO>();
 
 		for(int i = 0; i<list.size(); i++) {	
 			List<UserVO> userlist = new ArrayList<UserVO>();
@@ -87,7 +85,7 @@ public class HomeController {
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
 		model.addAttribute("user_info_idx", user_info_idx);
-		System.out.println(list.get(0).getBoard_idx());
+
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
 		model.addAttribute("recommendlist", recommend_list);
@@ -98,7 +96,8 @@ public class HomeController {
 	@RequestMapping(value = "/loadpost", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
-		int user_idx = 2;
+		System.out.println("여긴오냐?");
+		int user_idx = 1;
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
 		List<Integer> likelist = profileService.select_like(user_idx);
 		for(int i = 0; i<list.size(); i++) {

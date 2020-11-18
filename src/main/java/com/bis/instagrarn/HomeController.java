@@ -40,25 +40,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
-		int user_idx = 2;
-		List<ProfileVO> list = profileService.select_post(user_idx, 0);
-		List<Integer> likelist = profileService.select_like(user_idx);
-		List<UserVO> recommend_list = profileService.select_recommend(user_idx);
-
-		for(int i = 0; i<list.size(); i++) {	
-			List<UserVO> userlist = new ArrayList<UserVO>();
-			UserVO uservo = userService.select_id(list.get(i).getUser_idx());
-			userlist.add(uservo);
-
-			if(likelist.contains(list.get(i).getBoard_idx())) {
-				list.get(i).setIsLike(true);
-			} else {
-				list.get(i).setIsLike(false);
-			}
-			List<List<String>> replylist = profileService.select_reply(list.get(i).getBoard_idx());
-			list.get(i).setReplys(replylist);
-		}
-		
+		int user_idx = 0;
+		//------------------------------------
 		int user_info_idx = 0;
 		String user_info_id = "";
 		String user_info_fullname = "";
@@ -77,15 +60,33 @@ public class HomeController {
 						user_info_id = session_info.getId();
 						user_info_fullname = session_info.getFullname();
 						user_info_idx = session_info.getIdx();
+						user_idx = user_info_idx;
 					}
 				}
 			}
+		}
+		//------------------------------------
+		List<ProfileVO> list = profileService.select_post(user_idx, 0);
+		List<Integer> likelist = profileService.select_like(user_idx);
+		List<UserVO> recommend_list = profileService.select_recommend(user_idx);
+
+		for(int i = 0; i<list.size(); i++) {	
+			List<UserVO> userlist = new ArrayList<UserVO>();
+			UserVO uservo = userService.select_id(list.get(i).getUser_idx());
+			userlist.add(uservo);
+
+			if(likelist.contains(list.get(i).getBoard_idx())) {
+				list.get(i).setIsLike(true);
+			} else {
+				list.get(i).setIsLike(false);
+			}
+			List<List<String>> replylist = profileService.select_reply(list.get(i).getBoard_idx());
+			list.get(i).setReplys(replylist);
 		}
 
 		model.addAttribute("user_info_id", user_info_id);
 		model.addAttribute("user_info_fullname", user_info_fullname);
 		model.addAttribute("user_info_idx", user_info_idx);
-
 		model.addAttribute("loadlist", list);
 		model.addAttribute("likelist", likelist);
 		model.addAttribute("recommendlist", recommend_list);
@@ -96,8 +97,27 @@ public class HomeController {
 	@RequestMapping(value = "/loadpost", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
-		System.out.println("여긴오냐?");
-		int user_idx = 1;
+		int user_idx = 0;
+		//-------------------
+		Cookie[] cookies = request.getCookies();
+		String user_id_info = "";
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_id_info = session_info.getId();
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		//-------------------
 		List<ProfileVO> list = profileService.select_post(user_idx, page);
 		List<Integer> likelist = profileService.select_like(user_idx);
 		for(int i = 0; i<list.size(); i++) {
@@ -115,7 +135,6 @@ public class HomeController {
 	@RequestMapping(value = "/loadalert", method = RequestMethod.GET)
 	@ResponseBody
 	public List<List<String>> loadalert(Model model, int user_idx) {
-
 		List<List<String>> loadAlertList = profileService.loadalert(user_idx);
 		return loadAlertList;
 	}
@@ -123,7 +142,25 @@ public class HomeController {
 	@RequestMapping(value = "/add_reply", method = RequestMethod.GET)
 	@ResponseBody
 	public int add_reply(Model model, int board_idx, String reply) {
-		int user_idx = 2;
+		int user_idx = 0;
+		//------------------------
+		Cookie[] cookies = request.getCookies();
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		//------------------------
 		int from_user_idx = user_idx;
 		int to_user_idx = 1;
 		String alert_type = "reply";
@@ -135,7 +172,25 @@ public class HomeController {
 	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
-		int user_idx = 2;
+		int user_idx = 0;
+		//------------------------
+		Cookie[] cookies = request.getCookies();
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		//------------------------
 		int from_user_idx = user_idx;
 		int to_user_idx = 1;
 		String alert_type = "like";
@@ -147,14 +202,31 @@ public class HomeController {
 	@RequestMapping(value = "/clickUnLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickUnLike(Model model, int board_idx) {
-		int user_idx = 2;
+		int user_idx = 0;
+		//------------------------
+		Cookie[] cookies = request.getCookies();
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		//------------------------
 		int res = profileService.unclicked_like(board_idx, user_idx);
 		return board_idx;
 	}
 	
 	@RequestMapping(value = {"/", "/loginpage"})
 	public String loginpage() {
-		
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
@@ -179,7 +251,6 @@ public class HomeController {
 				}
 			}
 		}
-		System.out.println(user_id_info);
 		return user_id_info;
 	}
 	
@@ -197,7 +268,6 @@ public class HomeController {
 			}else {
 				for (Cookie cookie : cookies) {
 					if("rememberSession".equals(cookie.getName())) {
-
 						HttpSession session = request.getSession();
 						session.removeAttribute(cookie.getValue());
 						cookie.setValue(null);
@@ -238,9 +308,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/signup")
 	public String signup(UserVO vo) {
-		System.out.println(vo.getFullname());
 		int res = userService.signup(vo);
-		
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	

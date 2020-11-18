@@ -315,11 +315,16 @@ public class HomeController {
 	
 	@RequestMapping("/id_check.do")
 	@ResponseBody
-	public String id_check(String phone) {
-		int res = userService.signup_check(phone);
+	public String id_check(String phone, String id) {
+		int res = userService.signup_check_EorP(phone);
+		int res2 = userService.signup_check_id(id);
 		String result = "";
 		if(res != 1) {
 			result = "no";
+			return result;
+		}
+		if(res2 != 1) {
+			result = "duple id";
 			return result;
 		}
 		result = "yes";

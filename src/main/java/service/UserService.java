@@ -17,8 +17,12 @@ public class UserService {
 		int res = user_dao.insert(vo);
 		return res;
 	}
-	public int signup_check(String phone) {
+	public int signup_check_EorP(String phone) {
 		int res = user_dao.select_one_check(phone);
+		return res;
+	}
+	public int signup_check_id(String id) {
+		int res = user_dao.select_one_check_id(id);
 		return res;
 	}
 

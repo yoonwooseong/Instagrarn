@@ -29,6 +29,49 @@ public class UserDAO {
 		
 		return res;
 	}
+	public int select_one_check( String phone ) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	
+		String sql = "select * from Insta_user where phone='" + phone + "'";
+		
+		List<UserVO> checkid = jdbcTemplate.query(sql, new RowMapper<UserVO>() {
+			@Override
+			public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UserVO vo = new UserVO(
+						rs.getInt("idx"),
+						rs.getString("full_name"),
+						rs.getString("id")
+						);
+				return vo;
+			}
+		});
+		if(checkid.size() != 0) {
+			return -1;
+		}
+		return 1;
+	}
+	public int select_one_check_id( String id ) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	
+		String sql = "select * from Insta_user where id='" + id + "'";
+		
+		List<UserVO> checkid = jdbcTemplate.query(sql, new RowMapper<UserVO>() {
+			@Override
+			public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UserVO vo = new UserVO(
+						rs.getInt("idx"),
+						rs.getString("full_name"),
+						rs.getString("id")
+						);
+				return vo;
+			}
+		});
+		if(checkid.size() != 0) {
+			return -1;
+		}
+		return 1;
+	}
+	
 	
 	public UserVO select_one( UserVO vo ) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

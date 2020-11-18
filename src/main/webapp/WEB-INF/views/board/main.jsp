@@ -14,44 +14,48 @@
 
 	var num = 1;
 	var path = "${ pageContext.request.contextPath }/resources/images/ex_post_img";
-	
 	var page_count = 1;
+
 	window.onscroll = function(ev) {
 		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight
 				&& (window.innerHeight + window.scrollY) - 40 <= document.body.offsetHeight) {
 			//여기서 Ajax로 컨트롤러로 들어가 데이터를 가져와 정보 넣어주기
 			load_post_info(page_count);
-			function load_post_info(page) {
-				var url = "loadpost";
-				var param = "page=" + page;
-				sendRequest(url, param, resultFn, "GET");
-			}
-			function resultFn() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var lists = document.getElementById("lists");
-					var data = xhr.responseText;
-					var json = eval(data);
-					page_count++;
-					for (var i = 0; i < json.length; i++) {
-						var board_idx = json[i].board_idx;
-						var user_idx = json[i].user_idx;
-						var img = json[i].img;
-						var content = json[i].content;
-						var area = json[i].area;
-						var like_num = json[i].like_num;
-						console.log(data);
-						var replylist = json[i].replys;
-						var data = {'img':img, 'content':content, 'like_num':like_num, 'board_idx':board_idx, 'replylist':replylist};
-						console.log(data.replylist[0]);
-						var one = document.createElement('li');
-						var ones = addscroll(data);
-						one.innerHTML = ones;
-						lists.appendChild(one);
-					}
-				}
-			}
+			
 		}
 	};
+	//포스터로드
+	function load_post_info(page) {
+		console.log("여기");
+		var url = "loadpost";
+		var param = "page=" + page;
+		sendRequest(url, param, resultFn, "GET");
+	}
+	function resultFn() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var lists = document.getElementById("lists");
+			var data = xhr.responseText;
+			var json = eval(data);
+			page_count++;
+			console.log("여기2");
+			for (var i = 0; i < json.length; i++) {
+				var board_idx = json[i].board_idx;
+				var user_idx = json[i].user_idx;
+				var img = json[i].img;
+				var content = json[i].content;
+				var area = json[i].area;
+				var like_num = json[i].like_num;
+				console.log(data);
+				var replylist = json[i].replys;
+				var data = {'img':img, 'content':content, 'like_num':like_num, 'board_idx':board_idx, 'replylist':replylist};
+				console.log(data.replylist[0]);
+				var one = document.createElement('li');
+				var ones = addscroll(data);
+				one.innerHTML = ones;
+				lists.appendChild(one);
+			}
+		}
+	}
 	
 	//댓글 달기 Ajax
 	function add_reply(board_idx){
@@ -133,17 +137,17 @@
 		<div class="contain">
 			<ul id="lists">
 				<li class="one_post">
-					<c:forEach var="loadlist" items="${loadlist}"><c:forEach var="userlist" items="${userlist}">
+					<c:forEach var="loadlist" items="${loadlist}"><%-- <c:forEach var="userlist" items="${userlist}"> --%>
 						<div class="article">
 							<article class="article2">
 								<header class="header_title">
 									<div class="post_icon">
-										<a href="/instagrarn/profile?user_idx=${userlist.idx }"> <img
+										<a href="/instagrarn/profile?user_idx=${loadlist.user_idx }"> <img
 											src="${ pageContext.request.contextPath }/resources/images/IconME.png"
 											alt="myInfo">
 										</a>
 									</div>
-									<div class="post_name">${userlist.id }</div>
+									<div class="post_name">${loadlist.id }</div>
 									<div class="post_sub_action">...</div>
 								</header>
 								<div class="post_img">
@@ -213,7 +217,7 @@
 								</div>
 							</article>
 						</div>
-					</c:forEach></c:forEach>
+					</c:forEach><%-- </c:forEach> --%>
 					<div class="sub_menu">
 						<div class="user_info">
 							<div class="user_info_profile_img">

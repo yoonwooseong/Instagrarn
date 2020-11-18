@@ -7,11 +7,39 @@
 <title>가입하기 · Instagrarn</title>
 	<link rel="icon" type="image/png"  href="${ pageContext.request.contextPath }/resources/images/favi.png"/>
 	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/signup.css">
-
+	<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/httpRequest.js"></script>
 	<script type="text/javascript">
 		function send(){
 			var f = document.f;
 			f.submit();
+		}
+		
+		function id_check() {
+			var f = document.f;
+			var phone = f.phone.value.trim();
+			var num_check = /^[0-9]*$/;
+			var email_check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;				
+			
+			if(!email_check.test(phone) && (phone.length != 11 && !num_check.test(phone))) {
+				alert("휴대폰 번호 또는 이메일을 입력해주세요");
+				return;
+			}
+			var url = "id_check.do";
+			var param = "phone=" + encodeURIComponent(phone);
+			sendRequest(url, param, resultFn, "post");
+		}
+		
+		function resultFn() {
+			if(xhr.readyState == 4 && xhr.status == 200){
+				var data = xhr.responseText;
+				if(data == 'no'){
+					alert("동일한 아이디가 있습니다.");
+					return;
+				}
+				var f = document.f;
+				f.submit();
+			}
+			
 		}
 	</script>
 	
@@ -48,11 +76,11 @@
 					<div class="login_part_line"></div>
 				</div>
 				<form action="signup" method="post" name="f">
-					<input class="text" name="phone" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="휴대폰 번호 또는 이메일 주소">
+					<input class="text" id="phone" name="phone" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="휴대폰 번호 또는 이메일 주소">
 					<input class="text" name="fullname" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="성명">
 					<input class="text" name="id" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="사용자 이름">
 					<input class="text" id="test" name="pwd" style="width:270px;height:37px; background-color: #FAFAFA;" placeholder="비밀번호">
-					<input class="signin_btn" id="btn-submit" type="button" disabled style="width:270px;height:30px; background-color: #B2DFFC;" value="가입" onclick="send();">
+					<input class="signin_btn" id="btn-submit" type="button" disabled style="width:270px;height:30px; background-color: #B2DFFC;" value="가입" onclick="id_check();">
 				</form>
 				<div class="info_warn">가입하면 Instagram의 약관, 데이터 정책 및 쿠키 정책에 동의하게 됩니다.</div>
 			</div>

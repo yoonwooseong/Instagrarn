@@ -17,6 +17,10 @@ public class UserService {
 		int res = user_dao.insert(vo);
 		return res;
 	}
+	public int signup_check(String phone) {
+		int res = user_dao.select_one_check(phone);
+		return res;
+	}
 
 	public UserVO signin(UserVO vo) {
 		UserVO login_vo = user_dao.select_one(vo);

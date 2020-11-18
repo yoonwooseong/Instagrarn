@@ -308,8 +308,22 @@ public class HomeController {
 	
 	@RequestMapping(value = "/signup")
 	public String signup(UserVO vo) {
+		
 		int res = userService.signup(vo);
 		return Common.User.VIEW_PATH + "login.jsp";
+	}
+	
+	@RequestMapping("/id_check.do")
+	@ResponseBody
+	public String id_check(String phone) {
+		int res = userService.signup_check(phone);
+		String result = "";
+		if(res != 1) {
+			result = "no";
+			return result;
+		}
+		result = "yes";
+		return result;
 	}
 	
 }

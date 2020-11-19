@@ -117,4 +117,12 @@ public class UserDAO {
 		});
 		return list.get(0);
 	}
+	
+	public int insert_follow(int user_idx, int follow_idx) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.update("insert into Insta_follow (idx, follower_idx, following_idx) "
+				+ "VALUES (0, ?, ?)", user_idx, follow_idx);
+		
+		return res;
+	}
 }

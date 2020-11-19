@@ -35,4 +35,9 @@ public class UserService {
 		UserVO uservo = user_dao.select(user_idx);
 		return uservo;
 	}
+	
+	public int follow(int user_idx, int follow_idx) {
+		user_dao.insert_follow(user_idx, follow_idx);
+		return 0;
+	}
 }

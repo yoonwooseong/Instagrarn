@@ -104,7 +104,7 @@ public class ProfileDAO {
 	public List<UserVO> select_recommend(int user_idx) {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//where user_idx = " + user_idx + "
-		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " order by idx desc";
+		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " and idx not in (select following_idx from Insta_follow where follower_idx = "+ user_idx +") order by idx desc";
 		
 		List<UserVO> list =jdbcTemplate.query(sql, new RowMapper<UserVO>() {
 

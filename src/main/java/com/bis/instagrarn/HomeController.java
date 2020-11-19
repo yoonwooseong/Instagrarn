@@ -38,6 +38,7 @@ public class HomeController {
 	@Autowired
 	HttpServletRequest request;
 	
+	//메인페이지, 로그인 후 첫 페이지
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
 		int user_idx = 0;
@@ -94,6 +95,7 @@ public class HomeController {
 		return Common.Board.VIEW_PATH + "main.jsp";
 	}
 	
+	//게시글 불러오기
 	@RequestMapping(value = "/loadpost", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ProfileVO> loadpost(Model model, @RequestParam(value="page", defaultValue="1")int page) {
@@ -132,6 +134,7 @@ public class HomeController {
 		return list;
 	}
 	
+	//알람 불러오기
 	@RequestMapping(value = "/loadalert", method = RequestMethod.GET)
 	@ResponseBody
 	public List<List<String>> loadalert(Model model, int user_idx) {
@@ -139,6 +142,7 @@ public class HomeController {
 		return loadAlertList;
 	}
 	
+	//댓글달기
 	@RequestMapping(value = "/add_reply", method = RequestMethod.GET)
 	@ResponseBody
 	public int add_reply(Model model, int board_idx, String reply) {
@@ -169,6 +173,7 @@ public class HomeController {
 		return board_idx;
 	}
 	
+	//좋아요
 	@RequestMapping(value = "/clickLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickLike(Model model, int board_idx) {
@@ -199,6 +204,7 @@ public class HomeController {
 		return board_idx;
 	}
 	
+	//좋아요 취소
 	@RequestMapping(value = "/clickUnLike", method = RequestMethod.GET)
 	@ResponseBody
 	public int clickUnLike(Model model, int board_idx) {
@@ -225,11 +231,13 @@ public class HomeController {
 		return board_idx;
 	}
 	
+	//로그인 페이지, 첫 페이지
 	@RequestMapping(value = {"/", "/loginpage"})
 	public String loginpage() {
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
+	//쿠키 확인
 	@RequestMapping("/cookie_check")
 	@ResponseBody
 	public String first() {
@@ -254,6 +262,7 @@ public class HomeController {
 		return user_id_info;
 	}
 	
+	//로그인
 	@RequestMapping(value = "/login")
 	public String login(UserVO vo, HttpServletResponse response) {
 
@@ -300,19 +309,20 @@ public class HomeController {
 		return "redirect:main";
 	}
 
-	
+	//회원가입 페이지 이동
 	@RequestMapping(value =  "/signuppage")
 	public String signuppage() {
 		return Common.User.VIEW_PATH + "signup.jsp";
 	}
 	
+	//회원가입
 	@RequestMapping(value = "/signup")
 	public String signup(UserVO vo) {
-		
 		int res = userService.signup(vo);
 		return Common.User.VIEW_PATH + "login.jsp";
 	}
 	
+	//아이디 중복 체크
 	@RequestMapping("/id_check.do")
 	@ResponseBody
 	public String id_check(String phone, String id) {
@@ -329,6 +339,29 @@ public class HomeController {
 		}
 		result = "yes";
 		return result;
+	}
+	
+	@RequestMapping("/follow")
+	public String following(int follow_idx) {
+		Cookie[] cookies = request.getCookies();
+		int user_idx = 0;
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		userService.follow(user_idx, follow_idx);
+		return "redirect:main";
 	}
 	
 }

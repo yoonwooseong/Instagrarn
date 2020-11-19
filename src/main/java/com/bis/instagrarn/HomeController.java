@@ -45,7 +45,7 @@ public class HomeController {
 		List<Integer> likelist = profileService.select_like(user_idx);
 		List<UserVO> recommend_list = profileService.select_recommend(user_idx);
 		//for(int i = 0; i<list.size(); i++) {
-		//List<UserVO> userlist = new ArrayList<UserVO>();
+		List<UserVO> userlist = new ArrayList<UserVO>();
 
 		for(int i = 0; i<list.size(); i++) {	
 			UserVO uservo = userService.select_id(list.get(i).getUser_idx());

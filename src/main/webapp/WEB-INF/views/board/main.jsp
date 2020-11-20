@@ -22,7 +22,6 @@
 				&& (window.innerHeight + window.scrollY) - 40 <= document.body.offsetHeight) {
 			//여기서 Ajax로 컨트롤러로 들어가 데이터를 가져와 정보 넣어주기
 			load_post_info(page_count);
-			
 		}
 	};
 	//포스터로드

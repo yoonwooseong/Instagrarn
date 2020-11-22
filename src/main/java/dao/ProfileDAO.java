@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import vo.FollowVO;
 import vo.ProfileVO;
 import vo.UserVO;
 
@@ -233,6 +234,21 @@ public class ProfileDAO {
 
 		int res = jdbcTemplate.update("DELETE FROM Insta_likes WHERE user_idx = ? AND board_idx = ?", user_idx, board_idx);
 		
+		return res;
+	}
+
+
+	public int follower(int user_info_idx) {
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.queryForInt("select count(*) from Insta_follow where following_idx = " + user_info_idx);
+		return res;
+	}
+	
+	public int follow(int user_info_idx) {
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.queryForInt("select count(*) from Insta_follow where follower_idx = " + user_info_idx);
 		return res;
 	}
 

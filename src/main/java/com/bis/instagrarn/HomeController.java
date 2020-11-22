@@ -372,4 +372,30 @@ public class HomeController {
 		return "redirect:main";
 	}
 	
+	//팔로우 리스트 모두 보기
+	@RequestMapping(value =  "/seeallfollow")
+	public String SeeAllFollow(Model model) {
+		int user_idx = 0;
+		//-------------------
+		Cookie[] cookies = request.getCookies();
+		if(cookies == null) {
+			
+		}else {
+			for (Cookie cookie : cookies) {
+				if("rememberSession".equals(cookie.getName())) {
+					HttpSession session = request.getSession();
+					UserVO session_info = (UserVO)session.getAttribute(cookie.getValue());
+					if(session_info == null) {
+		               
+		            }else {
+		            	user_idx = session_info.getIdx();
+		            }
+				}
+			}
+		}
+		List<UserVO> follow_list = profileService.select_recommend(user_idx);
+		model.addAttribute("followlist", follow_list);
+		return Common.User.VIEW_PATH + "seeallfollow.jsp";
+	}
+	
 }

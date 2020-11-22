@@ -260,7 +260,7 @@
 						
 						<ul class="friend_recommend">
 							<div class="friend_recommend_title">
-								회원님을 위한 추천 <a class="more_view_recommend" href="#">모두 보기</a>
+								회원님을 위한 추천 <a class="more_view_recommend" href="/instagrarn/seeallfollow">모두 보기</a>
 							</div>
 							
 							<c:forEach var="ones" items="${recommendlist}">

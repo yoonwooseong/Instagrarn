@@ -92,7 +92,7 @@
 		if(xhr.readyState == 4 && xhr.status == 200){
 			var data = xhr.responseText;
 			var btn_like = document.getElementById("btn_like_"+data).src;
-			var likeView = document.getElementById("likeView");
+			var likeView = document.getElementById("likeView_"+data);
 			var num = likeView.innerHTML.replace("좋아요 ","").replace("개","");
 			if(btn_like.includes('_click')){
 				addLikeNumber = Number(num)-1;
@@ -202,7 +202,7 @@
 	
 									</section>
 									<section class="post_like">
-										<a href="#" id="likeView">좋아요 ${loadlist.like_num}개</a>
+										<a href="#" id="likeView_${loadlist.board_idx}">좋아요 ${loadlist.like_num}개</a>
 									</section>
 								</div>
 								<div>
@@ -260,7 +260,7 @@
 						
 						<ul class="friend_recommend">
 							<div class="friend_recommend_title">
-								회원님을 위한 추천 <a class="more_view_recommend" href="#">모두 보기</a>
+								회원님을 위한 추천 <a class="more_view_recommend" href="/instagrarn/seeallfollow">모두 보기</a>
 							</div>
 							
 							<c:forEach var="ones" items="${recommendlist}">

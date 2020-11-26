@@ -51,6 +51,7 @@ public class ProfileService {
 	
 	public int add_reply(int board_idx, int user_idx, String reply) {
 		int res2 = profile_dao.add_reply_DB(board_idx, user_idx, reply);
+		profile_dao.plus_reply_num(board_idx, user_idx);
 		return res2;
 	}
 	

@@ -348,7 +348,7 @@ public class HomeController {
 		result = "yes";
 		return result;
 	}
-	
+	//팔로우
 	@RequestMapping("/follow")
 	public String following(int follow_idx) {
 		Cookie[] cookies = request.getCookies();

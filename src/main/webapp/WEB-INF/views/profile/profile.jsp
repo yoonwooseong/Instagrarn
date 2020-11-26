@@ -105,9 +105,9 @@
 								<div class="hover">
 									<div class="hover_box">
 										<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_heart.png" width="18" height="18" >
-										<div class="hover_text">2</div>  
+										<div class="hover_text">${list.like_num}</div>  
 										<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_text.png" width="18" height="18" >
-										<div class="hover_text">2</div>
+										<div class="hover_text">${list.reply_num}</div>
 									</div>
 								</div>
 							</div>
@@ -117,9 +117,9 @@
 								<div class="hover2">
 									<div class="hover_box">
 										<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_heart.png" width="18" height="18" >
-										<div class="hover_text">2</div>  
+										<div class="hover_text">${list.like_num}</div>  
 										<img class="hover_img" src="${ pageContext.request.contextPath }/resources/images/hover_text.png" width="18" height="18" >
-										<div class="hover_text">2</div>
+										<div class="hover_text">${list.reply_num}</div>
 									</div>
 								</div></div>
 						</c:otherwise>

@@ -59,7 +59,7 @@
 	
 	//댓글 달기 Ajax
 	function add_reply(board_idx){
-		var reply_content = document.getElementById("post_comment_add_loc").value;
+		var reply_content = document.getElementById("post_comment_add_loc_"+board_idx).value;
 		var url = "add_reply"
 		var param = "board_idx="+board_idx+"&reply="+reply_content;
 		sendRequest(url, param, resultClickAddreply, "GET");
@@ -70,7 +70,7 @@
 			var replyUl = document.getElementById("post_comment_headers_"+data);
 			var oneReply = document.createElement('li');
 			var user_id = document.getElementById("user_id").value;
-			var record_content = document.getElementById("post_comment_add_loc").value;
+			var record_content = document.getElementById("post_comment_add_loc_"+data).value;
 			
 			oneReply.innerHTML = "<b>"+user_id+"</b> "+record_content;
 			replyUl.appendChild(oneReply);
@@ -228,7 +228,7 @@
 								</div>
 								<div>
 									<div class="post_comment_add">
-										<input id="post_comment_add_loc" placeholder="댓글 달기...">
+										<input id="post_comment_add_loc_${loadlist.board_idx}" class="post_comment_add_loc" placeholder="댓글 달기...">
 										<input id="post_comment_add_btn" type="button" value="게시" onclick="add_reply(${loadlist.board_idx});">
 									</div>
 								</div>

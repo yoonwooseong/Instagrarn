@@ -189,7 +189,7 @@ main div .article{
 	border-top-width:1px;
 }
 
-#post_comment_add_loc{
+.post_comment_add_loc{
 	width:550px;
 	height:20px;
 	border-style:none;

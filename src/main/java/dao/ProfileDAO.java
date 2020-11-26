@@ -50,7 +50,8 @@ public class ProfileDAO {
 						rs.getString("img"),
 						rs.getString("content"),
 						rs.getString("area"),
-						rs.getInt("like_num"));
+						rs.getInt("like_num"),
+						rs.getInt("reply_num"));
 				return list;
 			}
 			
@@ -75,7 +76,8 @@ public class ProfileDAO {
 						rs.getString("img"),
 						rs.getString("content"),
 						rs.getString("area"),
-						rs.getInt("like_num"));
+						rs.getInt("like_num"),
+						rs.getInt("reply_num"));
 				
 				list.setIsLike(false);
 				return list;
@@ -208,6 +210,16 @@ public class ProfileDAO {
 				+ "VALUES (0, ?, ?, ?)", board_idx, user_idx, reply);
 		
 		return board_idx;
+	}
+	
+	public int plus_reply_num(int board_idx, int user_idx){
+
+		String sql = "update Insta_board set reply_num = reply_num + 1 where board_idx=" + board_idx;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		int res = jdbcTemplate.update(sql);
+		
+		return res;
 	}
 	
 	public int add_alert_DB(int from_user_idx, int to_user_idx, String alert_type){

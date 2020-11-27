@@ -263,13 +263,8 @@ main div.sub_menu .friend_story{
 }
 
 main div.sub_menu .friend_recommend{
-	background-color: #FFFFFF;
 	width:290px;
 	height:200px;
-	border-style:solid;
-	border-color: #DDD;
-	border-width:1px;
-	border-radius:3px;
 	margin-bottom:10px;
 }
 
@@ -277,7 +272,6 @@ main div.sub_menu .friend_recommend li{
 	font-size:10px;
 	color:#8e8e8e;
 	margin-top: 8px;
-	margin-left: 12px;
 }
 main div.sub_menu .friend_recommend li .recommend_id{
 	font-size:12px;

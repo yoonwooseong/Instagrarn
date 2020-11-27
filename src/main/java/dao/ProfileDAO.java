@@ -108,7 +108,7 @@ public class ProfileDAO {
 	public List<UserVO> select_recommend(int user_idx) {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//where user_idx = " + user_idx + "
-		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " and idx not in (select following_idx from Insta_follow where follower_idx = "+ user_idx +") order by idx desc";
+		String sql = "select idx, full_name, id from Insta_user where idx !=" +user_idx+ " and idx not in (select following_idx from Insta_follow where follower_idx = "+ user_idx +") order by idx desc limit 0, 4";
 		
 		List<UserVO> list =jdbcTemplate.query(sql, new RowMapper<UserVO>() {
 
@@ -169,7 +169,7 @@ public class ProfileDAO {
 	public List<List<String>> loadalert(int user_idx){
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String sql = "select id, alert_type from Insta_alert_view where to_user_idx = '" + user_idx + "'";
+		String sql = "select id, alert_type from Insta_alert_view where to_user_idx = '" + user_idx + "' order by idx desc limit 0, 5";
 
 		List<List<String>> list = jdbcTemplate.query(sql, new RowMapper<List<String>>() {
 

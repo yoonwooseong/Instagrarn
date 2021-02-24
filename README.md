@@ -14,7 +14,7 @@ Fork on beauty in side's Instagram clone coding
 
 ### 🔗 Link
 
- - [Beauty in side](https://github.com/orgs/Beauty-inside/dashboard)
+ - [Beauty in side](https://github.com/Beauty-inside)
  - [Slack](https://app.slack.com/client/T01A83F19PX/C01A83XR17X)
  - [스토리보드](https://docs.google.com/presentation/d/1Jdw3N1Zg4izx1QxoQNI6AnB7PAKZzWiPV-WgzYb7SSY/edit#slide=id.g976c30b29d_11_0)
 
